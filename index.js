@@ -5,8 +5,10 @@ const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
 
-const SpotifyWebApi = require('../src/server');
+const SpotifyWebApi = require('./src/server');
 const express = require('express');
+var bodyParser = require('body-parser');
+
 
 const scopes = [
   'user-read-playback-state',
@@ -34,18 +36,51 @@ const spotifyApi = new SpotifyWebApi({
 });
 
 var app = express();
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json())
+
+app.use(express.static('public'));
+app.set("view engine", "ejs")
 
 
 app.get('/loginLanding', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/login.html'));
-  // res.send(`ello mate`);
+  // res.sendFile(path.join(__dirname, 'public/login.html'));
+  exStr = "passing data example from server to browser"
+  res.render("login", {exStr})
 
 });
+
+app.get('/generate', (req, res) => {
+  // res.sendFile(path.join(__dirname, 'public/login.html'));
+  res.render("generate")
+
+});
+
+app.post('/generate', (req, res) => {
+  // req.body object has your form values
+  console.log(req.body.playlistID)
+  console.log(req.body.length)
+  res.render("generate")
+
+  // app.use(express.static(__dirname + '/public'));
+
+
+
+  spotifyApi.getPlaylist(req.body.playlistID)
+  .then(function(data) {
+    console.log('Some information about this playlist', data.body);
+  }, function(err) {
+    console.log('Something went wrong!', err);
+  });
+});
+
+
 
 app.get('/login', (req, res) => {
   res.redirect(spotifyApi.createAuthorizeURL(scopes));
 });
+
+
 
 app.get('/callback', (req, res) => {
     const error = req.query.error;
@@ -74,7 +109,9 @@ app.get('/callback', (req, res) => {
         console.log(
           `Sucessfully retreived access token. Expires in ${expires_in} s.`
         );
-        res.sendFile(path.join(__dirname, 'public/homePage.html'));
+        // res.sendFile(path.join(__dirname, 'public/homePage.html'));
+
+        res.render("homePage")
   
         setInterval(async () => {
           const data = await spotifyApi.refreshAccessToken();
@@ -90,6 +127,7 @@ app.get('/callback', (req, res) => {
         res.send(`Error getting Tokens: ${error}`);
       });
   });
+
   
   app.listen(8888, () =>
     console.log(
