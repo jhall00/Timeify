@@ -5,7 +5,7 @@ const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
 
-const SpotifyWebApi = require('./src/server');
+const SpotifyWebApi = require('spotify-web-api-node');
 const express = require('express');
 var bodyParser = require('body-parser');
 
@@ -86,37 +86,37 @@ app.get('/callback', (req, res) => {
     const error = req.query.error;
     const code = req.query.code;
     const state = req.query.state;
-  
+
     if (error) {
       console.error('Callback Error:', error);
       res.send(`Callback Error: ${error}`);
       return;
     }
-  
+
     spotifyApi
       .authorizationCodeGrant(code)
       .then(data => {
         const access_token = data.body['access_token'];
         const refresh_token = data.body['refresh_token'];
         const expires_in = data.body['expires_in'];
-  
+
         spotifyApi.setAccessToken(access_token);
         spotifyApi.setRefreshToken(refresh_token);
-  
+
         console.log('access_token:', access_token);
         console.log('refresh_token:', refresh_token);
-  
+
         console.log(
           `Sucessfully retreived access token. Expires in ${expires_in} s.`
         );
         // res.sendFile(path.join(__dirname, 'public/homePage.html'));
 
         res.render("homePage")
-  
+
         setInterval(async () => {
           const data = await spotifyApi.refreshAccessToken();
           const access_token = data.body['access_token'];
-  
+
           console.log('The access token has been refreshed!');
           console.log('access_token:', access_token);
           spotifyApi.setAccessToken(access_token);
@@ -128,10 +128,9 @@ app.get('/callback', (req, res) => {
       });
   });
 
-  
+
   app.listen(8888, () =>
     console.log(
       'HTTP Server up. Now go to http://localhost:8888/loginLanding in your browser.'
     )
   );
-  
