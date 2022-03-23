@@ -1,7 +1,15 @@
 module.exports = {
   content: ['views/*.{html,js,ejs}'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'montserrat': ['Montserrat', 'sans-serif'] 
+      },
+      
+    },
+    colors:{
+      'mint': '#CEE2E4',
+    },
   },
   plugins: [],
 }

@@ -58,20 +58,24 @@ app.get('/generate', (req, res) => {
 
 app.post('/generate', (req, res) => {
   // req.body object has your form values
-  console.log(req.body.playlistID)
-  console.log(req.body.length)
+  console.log(req.body.length_minutes)
+  console.log(req.body.length_seconds)
+  console.log(req.body.mySource)
+  console.log(req.body.newName)
+  
+  
   res.render("generate")
 
   // app.use(express.static(__dirname + '/public'));
 
 
 
-  spotifyApi.getPlaylist(req.body.playlistID)
-  .then(function(data) {
-    console.log('Some information about this playlist', data.body);
-  }, function(err) {
-    console.log('Something went wrong!', err);
-  });
+  // spotifyApi.getPlaylist(req.body.playlistID)
+  // .then(function(data) {
+  //   console.log('Some information about this playlist', data.body);
+  // }, function(err) {
+  //   console.log('Something went wrong!', err);
+  // });
 });
 
 

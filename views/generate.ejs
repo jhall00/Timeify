@@ -4,22 +4,84 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- for tailwind (uncomment when ready to use) -->
-    <!-- <link rel="stylesheet" href = "/styles.css"> -->
+    <link rel="stylesheet" href = "/styles.css">
 
     <title>Generate</title>
 </head>
 <body>
-    <p>Generate</p>
-    <a href="http://localhost:8888/login">
+    <p>Generate Page</p>
+    <!-- <a href="http://localhost:8888/login">
         <input type="button" value="Log in" />
-     </a>
+     </a> -->
 
-     
-    <form action="/generate" method="post">
-        Playlist ID: <input type="text" name="playlistID"/><br><br>
-        Length: <input type="text" name="length"/><br><br>
-        <input type="submit" value="Generate"/><br><br><hr>
-    </form>
+    <div class = "flex justify-center">
+        <form action="/generate" method="post">
+
+            <div class="md:flex md:items-center mb-6">
+                <div class="w-full">
+                  <label class="font-montserrat block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-1" for="length_minutes">
+                    Timer Length
+                  </label>
+                </div>
+                <div class="relative md:w-2/3">
+                    <select class="font-montserrat bg-gray-200 appearance-none border-2 border-gray-200 rounded w-fit py-2 pl-3 pr-8 text-gray-700 leading-tight focus:outline-none focus:bg-white" id="length_minutes" type="text" name="length_minutes">
+                        <option value="" disabled selected>Minutes</option>
+                        
+                        <% var i = 0%>
+                        <% while (i < 60) { %>
+                            <option><%=i%></option>
+                            <% i += 5 }%> 
+
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                      </div>
+
+                </div>
+
+                <div class="relative md:w-2/3">
+                    <select class="font-montserrat bg-gray-200 appearance-none border-2 border-gray-200 rounded w-fit py-2 pl-3 pr-8 ml-2 text-gray-700 leading-tight focus:outline-none focus:bg-white" id="length_seconds" type="text" name="length_seconds">
+                        <option value="" disabled selected>Seconds</option>
+                        
+                        <% var i = 0%>
+                        <% while (i <= 500) { %>
+                            <option><%=i%></option>
+                            <% i ++ }%> 
+
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                      </div>
+
+                </div>
+              </div>
+
+
+            <div class="md:flex md:items-center mb-6">
+                <div class="w-full">
+                    <label class="font-montserrat block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-1" for="my_source">
+                        Source
+                    </label>
+                </div>
+                    <input class="font-montserrat bg-gray-200 appearance-none border-2 border-gray-200 rounded w-fit py-2 pl-3 pr-8 text-gray-700 leading-tight focus:outline-none focus:bg-white"  id="my_source" type="text" name="mySource">
+
+                
+            </div>
+
+
+            <div class="md:flex md:items-center mb-6">
+                <div class="w-full">
+                    <label class="font-montserrat block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-1" for="new_name">
+                        New Timer Name
+                    </label>
+                </div>
+                    <input class="font-montserrat bg-gray-200 appearance-none border-2 border-gray-200 rounded w-fit py-2 pl-3 pr-8 text-gray-700 leading-tight focus:outline-none focus:bg-white" id="new_name" type="text" name="newName">
+            </div>
+            <div class="md:flex justify-center mb-6">
+                <input class = "font-montserrat bg-mint hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-xl drop-shadow-md" type="submit" value="Generate"/><br><br><hr>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
 
