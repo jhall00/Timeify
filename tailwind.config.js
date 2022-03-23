@@ -5,11 +5,12 @@ module.exports = {
       fontFamily: {
         'montserrat': ['Montserrat', 'sans-serif'] 
       },
-      
-    },
-    colors:{
+      colors:{
       'mint': '#CEE2E4',
+      'shadow_mint': 'b9cbcd',
     },
+    },
+
   },
   plugins: [],
 }
