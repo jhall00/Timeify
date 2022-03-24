@@ -78,6 +78,11 @@ app.post('/generate', (req, res) => {
   // });
 });
 
+app.get('/load', (req, res) => {
+  res.render("load")
+
+});
+
 
 
 app.get('/login', (req, res) => {
