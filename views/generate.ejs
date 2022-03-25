@@ -88,12 +88,24 @@
                                     Source
                                 </label>
                             </div>
-                                <button class = "font-montserrat bg-mint hover:bg-shadow_mint text-black font-bold src-button py-3 px-4 rounded-xl drop-shadow-md" onclick="openSourceSearch()">Source</button>
+                                <button class = "font-montserrat bg-mint hover:bg-shadow_mint text-black font-bold src-button py-3 px-4 rounded-xl drop-shadow-md" id="searchBtn">Source</button>
                             
                         </div>
 
-                        <div class="search-popup" id="mysearch">
-                            
+                        <div class="search" id="mySearch">
+                            <div class="search-content">
+                                <span class="close">&times;</span>
+                                <p>Some Text in search</p>
+                                <p>Some Text in search</p>
+                                <p>Some Text in search</p>
+                                <p>Some Text in search</p>
+                                <p>Some Text in search</p>
+                                <p>Some Text in search</p>
+                                <p>Some Text in search</p>
+                                <p>Some Text in search</p>
+                                <p>Some Text in search</p>
+                                
+                            </div>
                         </div>
 
 
@@ -115,6 +127,26 @@
         </div>
     </div>
 
+    <script>
+        var search = document.getElementById("mySearch");
+        var btn = document.getElementById("searchBtn");
+        var span = document.getElementsByClassName("close")[0];
+
+        btn.onclick = function() {
+            search.style.display = "block";
+            return false;
+        }
+
+        span.onclick = function() {
+            search.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == search) {
+                search.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
 
