@@ -11,6 +11,7 @@ var bodyParser = require('body-parser');
 const { ModifierFlags } = require('typescript');
 
 
+
 const scopes = [
   'user-read-playback-state',
   'user-modify-playback-state',
@@ -84,6 +85,101 @@ app.get('/load', (req, res) => {
 
 });
 
+app.get('/player', (req, res) => {
+
+
+  var pID = "37i9dQZF1DZ06evO0ENBD2"
+  var songs = []
+  var playlistTitle =""
+  var cover_art =""
+  var type ="playlist"
+  const p1 = spotifyApi.getPlaylist(pID)
+  .then(function(data) {
+    // console.log('Some information about this playlist', data.body);
+    // console.log("/n/n all the songs", data.body.tracks.items);
+    data.body.tracks.items.forEach(track=> {
+
+      var length = millisToMinutesAndSeconds(track.track.duration_ms)
+      songs.push({title: track.track.name, artist: track.track.artists[0].name, length: length})
+      console.log(length)
+
+    })
+    playlistTitle = data.body.name
+    cover_art = data.body.images[0].url
+    
+  }, function(err) {
+    console.log('Something went wrong!', err);
+
+  });
+
+  access_token = spotifyApi.getAccessToken()
+  
+  // wait for all promises to be available
+  Promise.all([p1]).then(() => {
+    res.render("player", {songs, playlistTitle, access_token, cover_art})
+
+  })
+
+
+});
+
+
+app.post('/player', (req, res) => {
+ 
+  var pID = "37i9dQZF1DZ06evO0ENBD2"
+  var type ="playlist"
+
+  if(req.body.action == "connect_player" ){
+    // transfer playing to our web device
+    spotifyApi.transferMyPlayback([req.body.device_id])
+    .then(function() {
+      console.log('Transfering playback to ' + req.body.device_id);
+      res.json({msg:"transferred"})
+    }, function(err) {
+      //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
+      console.log('Something went wrong!', err);
+    });
+  }
+
+
+  if(req.body.action == "start"){
+   
+  // first time user clicks play
+
+    playerURI = {context_uri:"spotify:"+type+":"+pID};
+    spotifyApi.play(playerURI)
+    .then(function() {
+      console.log('Playback started');
+    }, function(err) {
+      //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
+      console.log('Something went wrong!', err);
+    });
+  }
+
+  // else if(req.body.action == "resume"){
+  //   spotifyApi.play()
+  //   .then(function() {
+  //     console.log('Playback started');
+  //   }, function(err) {
+  //     //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
+  //     console.log('Something went wrong!', err);
+  //   });
+  // }
+
+  // else if(req.body.action == "pause"){
+  //   spotifyApi.pause()
+  //   .then(function() {
+  //     console.log('Playback paused');
+  //   }, function(err) {
+  //     //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
+  //     console.log('Something went wrong!', err);
+  //   });
+  // }
+
+
+
+})
+
 // function openSourceSearch() {
 //   document.getElementById("mySearch").style.display = "block";
 // }
@@ -91,8 +187,6 @@ app.get('/load', (req, res) => {
 // function closeSourceSearch() {
 //   document.getElementById("mySearch").style.display = "none";
 // }
-
-
 
 
 app.get('/login', (req, res) => {
@@ -153,3 +247,11 @@ app.get('/callback', (req, res) => {
       'HTTP Server up. Now go to http://localhost:8888/loginLanding in your browser.'
     )
   );
+
+
+  function millisToMinutesAndSeconds(millis) {
+    var minutes = Math.floor(millis / 60000);
+    var seconds = ((millis % 60000) / 1000).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+  }
+  
