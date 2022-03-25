@@ -8,6 +8,7 @@ const REDIRECT_URI = process.env.REDIRECT_URI;
 const SpotifyWebApi = require('spotify-web-api-node');
 const express = require('express');
 var bodyParser = require('body-parser');
+const { ModifierFlags } = require('typescript');
 
 
 
@@ -179,6 +180,13 @@ app.post('/player', (req, res) => {
 
 })
 
+// function openSourceSearch() {
+//   document.getElementById("mySearch").style.display = "block";
+// }
+
+// function closeSourceSearch() {
+//   document.getElementById("mySearch").style.display = "none";
+// }
 
 
 app.get('/login', (req, res) => {
