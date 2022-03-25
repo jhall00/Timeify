@@ -14,6 +14,8 @@ module.exports = {
       'green_grad1': 'rgba(69, 97, 88, 0.9)',
       'green_grad2': 'rgba(69, 97, 88, .5)',
       'main-green': '456158',
+      'playlist-gray':'858585',
+      'gray-shadow': '787878'
 
     },
     backgroundImage: {
