@@ -87,11 +87,11 @@ app.get('/load', (req, res) => {
 
 app.get('/player', (req, res) => {
 
-
   var pID = "37i9dQZF1DZ06evO0ENBD2"
   var songs = []
   var playlistTitle =""
   var cover_art =""
+  var playlistLength =""
   var type ="playlist"
   const p1 = spotifyApi.getPlaylist(pID)
   .then(function(data) {
@@ -101,22 +101,24 @@ app.get('/player', (req, res) => {
 
       var length = millisToMinutesAndSeconds(track.track.duration_ms)
       songs.push({title: track.track.name, artist: track.track.artists[0].name, length: length})
-      console.log(length)
 
     })
     playlistTitle = data.body.name
     cover_art = data.body.images[0].url
+    playlistLength = millisToMinutesAndSeconds(data.body.duration_ms)
     
   }, function(err) {
     console.log('Something went wrong!', err);
 
   });
 
+
+
   access_token = spotifyApi.getAccessToken()
   
   // wait for all promises to be available
   Promise.all([p1]).then(() => {
-    res.render("player", {songs, playlistTitle, access_token, cover_art})
+    res.render("player", {songs, playlistTitle, access_token, cover_art, playlistLength})
 
   })
 
