@@ -4,13 +4,92 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- for tailwind (uncomment when ready to use) -->
-        <!-- <link rel="stylesheet" href = "/styles.css"> -->
+        <link rel="stylesheet" href = "/styles.css">
         <title>Load</title>
     </head>
-    <body>
-
-
-
-
+    <body class="bg-main-background bg-cover ">
+        <p>Load Page</p>
+        <div class = "flex justify-center">
+    
+            <div class = "bg-gradient-to-r from-white_grad1 to-white_grad2 backdrop-blur-lg shadow-lg w-5/6 h-max rounded-2xl pb-16">
+    
+                <!-- nav bar -->
+    
+                <div class="bg-transparent_white w-full h-14 rounded-t-2xl ">
+                    <div class="flex justify-end">
+    
+                    <a class = "pr-3" href="http://localhost:8888/generate">Generate</a>
+                    
+                    <a class = "pr-3" href="http://localhost:8888/load">Load</a>
+    
+                    </div>
+    
+    
+                </div>
+    
+                <p class = "flex justify-center p-8 font-montserrat text-2xl text-main-green">Load a pre-existing playlist, which uses our timer notifications.</p>
+    
+                <div class = "flex justify-center">
+                    <div class = "bg-gradient-to-br from-green_grad1 to-green_grad2 backdrop-blur-lg shadow-lg w-5/6 h-max rounded-2xl p-10">
+    
+                    <div class = "flex justify-center">
+                        <form action="/generate" method="post">
+    
+                            <div class="md:flex md:items-center mb-6">
+                                <div class="w-full">
+                                    <label class="font-montserrat block text-white font-bold md:text-left mb-1 md:mb-0 pr-1" for="my_source">
+                                        Source:
+                                    </label>
+                                </div>
+                                    <button class = "font-montserrat bg-mint hover:bg-shadow_mint text-black font-bold src-button py-3 px-4 rounded-xl drop-shadow-md" id="searchBtn">Select a source</button>
+                                
+                            </div>
+    
+                            <div class="search" id="mySearch">
+                                <div class="search-content rounded-xl">
+                                    <span class="close">&times;</span>
+                                    <p>Some Text in search</p>
+                                    <p>Some Text in search</p>
+                                    <p>Some Text in search</p>
+                                    <p>Some Text in search</p>
+                                    <p>Some Text in search</p>
+                                    <p>Some Text in search</p>
+                                    <p>Some Text in search</p>
+                                    <p>Some Text in search</p>
+                                    <p>Some Text in search</p>
+                                    
+                                </div>
+                            </div>
+    
+                            <div class="md:flex justify-center">
+                                <input class = "font-montserrat bg-mint hover:bg-shadow_mint text-black font-bold py-3 px-4 rounded-xl drop-shadow-md" type="submit" value="Generate"/><br><br><hr>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    
+        <script>
+            var search = document.getElementById("mySearch");
+            var btn = document.getElementById("searchBtn");
+            var span = document.getElementsByClassName("close")[0];
+    
+            btn.onclick = function() {
+                search.style.display = "block";
+                return false;
+            }
+    
+            span.onclick = function() {
+                search.style.display = "none";
+            }
+    
+            window.onclick = function(event) {
+                if (event.target == search) {
+                    search.style.display = "none";
+                }
+            }
+        </script>
     </body>
 </html>
