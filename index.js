@@ -86,12 +86,12 @@ app.get('/load', (req, res) => {
 });
 
 app.get('/player', (req, res) => {
-
+  https://open.spotify.com/playlist/0VZG0s66JThdEbZ1jrjDAf?si=4d462e01fc9f4fcf
   var pID = "37i9dQZF1DZ06evO0ENBD2"
   var songs = []
   var playlistTitle =""
   var cover_art =""
-  var playlistLength =""
+  var playlistLength =0
   var type ="playlist"
   const p1 = spotifyApi.getPlaylist(pID)
   .then(function(data) {
@@ -99,14 +99,14 @@ app.get('/player', (req, res) => {
     // console.log("/n/n all the songs", data.body.tracks.items);
     data.body.tracks.items.forEach(track=> {
 
+      playlistLength += track.track.duration_ms
       var length = millisToMinutesAndSeconds(track.track.duration_ms)
       songs.push({title: track.track.name, artist: track.track.artists[0].name, length: length})
+      
 
     })
     playlistTitle = data.body.name
     cover_art = data.body.images[0].url
-    playlistLength = millisToMinutesAndSeconds(data.body.duration_ms)
-    
   }, function(err) {
     console.log('Something went wrong!', err);
 
@@ -257,3 +257,5 @@ app.get('/callback', (req, res) => {
     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
   }
   
+  
+

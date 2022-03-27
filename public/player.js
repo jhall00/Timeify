@@ -158,22 +158,31 @@ window.onload = function(){
   var ppButton = document.getElementById("ppButton")
   var ppButtonIcon = document.getElementById("ppButtonPic")
 
+  var playlistLength = document.getElementById("playlistLength")
+  // in milliseconds
+  var playlistLengthStr = playlistLength.innerHTML
+
+  var playlistLengthLabel = document.getElementById("playerLengthLabel")
+  playlistLengthLabel.innerHTML = convertMsToTime(parseInt(playlistLengthStr))
+
 
 
 var counter = 0
-var timeleft = 300
+// var playlistSeconds =  convertMStoS(parseInt(playlistLengthStr))
+
+var timeleft = parseInt(playlistLengthStr)
 var interval = -1
 
 var countDown = document.getElementById("countDown")
 
-countDown.innerHTML = convertSeconds(timeleft - counter);
+countDown.innerHTML = convertMsToTime(timeleft - counter);
 
 
   ppButton.addEventListener("click", function() {
     if(interval == -1){
       interval = setInterval(function(){
-        counter ++
-        countDown.innerHTML= convertSeconds(timeleft - counter);
+        counter +=1000
+        countDown.innerHTML= convertMsToTime(timeleft - counter);
       }, 1000)
     }
     else{
@@ -185,21 +194,31 @@ countDown.innerHTML = convertSeconds(timeleft - counter);
     
 
 
-
-
-
-
 function convertSeconds(s) {
   var min = Math.floor(s / 60).toString();
   var sec = (s % 60).toString();
   return min.padStart(2, '0') + ':' + sec.padStart(2, '0');
-  
 
 }
 
+function convertMStoS(ms){
+  return (ms/1000)
+}
+function convertMsToTime(milliseconds) {
+  let seconds = Math.floor(milliseconds / 1000);
+  let minutes = Math.floor(seconds / 60);
+  let hours = Math.floor(minutes / 60);
 
+  seconds = seconds % 60;
+  minutes = minutes % 60;
+  hours = hours % 24;
 
-
-  
+  return `${padTo2Digits(hours)}:${padTo2Digits(minutes)}:${padTo2Digits(
+    seconds,
+  )}`;
+}
+function padTo2Digits(num) {
+  return num.toString().padStart(2, '0');
+}
 };
 
