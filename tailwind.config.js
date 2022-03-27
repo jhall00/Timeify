@@ -3,7 +3,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'montserrat': ['Montserrat', 'sans-serif'] 
+        'montserrat': ['Montserrat', 'sans-serif']
       },
       colors:{
       'mint': '#CEE2E4',
@@ -15,12 +15,13 @@ module.exports = {
       'green_grad2': 'rgba(69, 97, 88, .5)',
       'main-green': '456158',
       'playlist-gray':'858585',
-      'gray-shadow': '787878'
+      'gray-shadow': '787878',
+      'dark-gray': '303030'
 
     },
     backgroundImage: {
       'main-background': "url('/page_background.png')",
-      
+
     },
     },
 

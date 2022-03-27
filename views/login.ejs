@@ -1,22 +1,23 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- for tailwind (uncomment when ready to use) -->
-    <!-- <link rel="stylesheet" href = "/styles.css"> -->
-    <title>Log into Spotify</title>
-</head>
-<body>
-    <p id="tester">Landing Login Page</p>
-    <a href="http://localhost:8888/login">
-        <input type="button" value="Log in" />
-     </a>
-
-     <!-- how to grab data from server (from index.js) to browser (ejs syntax) -->
-     <p> <%=exStr%> </p>
-
-
-
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="/styles.css" />
+        <title>Log into Spotify</title>
+    </head>
+    <body class="bg-main-background bg-cover">
+        <div class="flex justify-center">
+            <div class="bg-gradient-to-r from-white_grad1 to-white_grad2 backdrop-blur-lg shadow-lg w-5/6 h-max rounded-2xl pb-16">
+                <div class="text-slate-50 text-center font-bold px-12 bg-dark-gray hover:bg-dark-gray
+                            rounded-lg drop-shadow-md py-12 w-fit">
+                    <a class="whitespace-pre-line text-3xl" href="http://localhost:8888/login"> Log in
+                        with Spotify
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- how to grab data from server (from index.js) to browser (ejs syntax) -->
+        <p><%=exStr%></p>
+    </body>
 </html>
