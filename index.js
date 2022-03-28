@@ -68,9 +68,6 @@ app.post('/generate', (req, res) => {
   
   res.render("generate")
 
-  // app.use(express.static(__dirname + '/public'));
-
-
 
   // spotifyApi.getPlaylist(req.body.playlistID)
   // .then(function(data) {
