@@ -24,10 +24,10 @@
                 <div class="flex justify-end">
 
                 <a class = "pr-3" href="http://localhost:8888/generate">Generate</a>
-                
+
                 <a class = "pr-3" href="http://localhost:8888/load">Load</a>
 
-                           
+
                 </div>
 
 
@@ -50,12 +50,12 @@
                             <div class="relative md:w-2/3">
                                 <select class="font-montserrat bg-gray-200 appearance-none border-2 border-gray-200 rounded w-fit py-2 pl-3 pr-8 text-gray-700 leading-tight focus:outline-none focus:bg-white" id="length_minutes" type="text" name="length_minutes">
                                     <option value="" disabled selected>Minutes</option>
-                                    
-                                
+
+
                                     <% var i = 0%>
                                     <% while (i <= 500) { %>
                                         <option><%=i%></option>
-                                        <% i ++ }%> 
+                                        <% i ++ }%>
 
                                 </select>
                                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -71,8 +71,8 @@
                                     <% var i = 0%>
                                     <% while (i < 60) { %>
                                         <option><%=i%></option>
-                                        <% i += 5 }%> 
-                
+                                        <% i += 5 }%>
+
 
                                 </select>
                                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
@@ -90,7 +90,7 @@
                                 </label>
                             </div>
                                 <button class = "font-montserrat bg-mint hover:bg-shadow_mint text-black font-bold src-button py-3 px-4 rounded-xl drop-shadow-md" id="searchBtn">Source</button>
-                            
+
                         </div>
 
                         <div class="search" id="mySearch">
@@ -105,7 +105,7 @@
                                 <p>Some Text in search</p>
                                 <p>Some Text in search</p>
                                 <p>Some Text in search</p>
-                                
+
                             </div>
                         </div>
 
@@ -121,28 +121,29 @@
                         <div class="md:flex justify-center">
                             <input class = "font-montserrat bg-mint hover:bg-shadow_mint text-black font-bold py-3 px-4 rounded-xl drop-shadow-md" type="submit" value="Generate"/><br><br><hr>
                         </div>
-              
+
                     </form>
-                    
+
                 </div>
             </div>
-  
+
             </div>
         </div>
         </div>
-        <a href="/player">                    
+        <a href="/player">
             <button class = "justify-center font-montserrat bg-white hover:bg-shadow_mint text-black font-bold src-button py-3 px-4 rounded-xl drop-shadow-md" id="searchBtn">Hard-coded link to player</button>
         </a>
+        <!-- A Button that calls search when clicked -->
+        <button id="test" class="text-slate-50 text-center font-bold px-12 bg-dark-gray hover:bg-dark-gray
+        rounded-lg drop-shadow-md py-12 w-fit">Temporary Fake Search Button</button>
+
     </div>
     </div>
-    
-    
 
     <script>
         var search = document.getElementById("mySearch");
         var btn = document.getElementById("searchBtn");
         var span = document.getElementsByClassName("close")[0];
-
         btn.onclick = function() {
             search.style.display = "block";
             return false;
@@ -158,6 +159,9 @@
             }
         }
     </script>
+    <script src="/search.js"></script>
+
+
 </body>
 </html>
 

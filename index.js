@@ -55,7 +55,6 @@ app.get('/loginLanding', (req, res) => {
 app.get('/generate', (req, res) => {
   // res.sendFile(path.join(__dirname, 'public/login.html'));
   res.render("generate")
-
 });
 
 app.post('/generate', (req, res) => {
@@ -64,10 +63,20 @@ app.post('/generate', (req, res) => {
   console.log(req.body.length_seconds)
   console.log(req.body.mySource)
   console.log(req.body.newName)
-  
-  
+
+
   res.render("generate")
 
+  res.render("generate")
+  //take a search term from the user and search for playlists
+  console.log("searching for playlists");
+  let dummy_text = "rock";
+  spotifyApi.searchPlaylists(dummy_text, { limit: 5 }).then(function (data) {
+    console.log(data.body.playlists);
+  }
+  ).catch(function (err) {
+    console.log(err);
+  });
   // app.use(express.static(__dirname + '/public'));
 
 
@@ -102,7 +111,7 @@ app.get('/player', (req, res) => {
       playlistLength += track.track.duration_ms
       var length = millisToMinutesAndSeconds(track.track.duration_ms)
       songs.push({title: track.track.name, artist: track.track.artists[0].name, length: length})
-      
+
 
     })
     playlistTitle = data.body.name
@@ -115,7 +124,7 @@ app.get('/player', (req, res) => {
 
 
   access_token = spotifyApi.getAccessToken()
-  
+
   // wait for all promises to be available
   Promise.all([p1]).then(() => {
     res.render("player", {songs, playlistTitle, access_token, cover_art, playlistLength})
@@ -127,7 +136,7 @@ app.get('/player', (req, res) => {
 
 
 app.post('/player', (req, res) => {
- 
+
   var pID = "37i9dQZF1DZ06evO0ENBD2"
   var type ="playlist"
 
@@ -145,7 +154,7 @@ app.post('/player', (req, res) => {
 
 
   if(req.body.action == "start"){
-   
+
   // first time user clicks play
 
     playerURI = {context_uri:"spotify:"+type+":"+pID};
@@ -253,9 +262,6 @@ app.get('/callback', (req, res) => {
 
   function millisToMinutesAndSeconds(millis) {
     var minutes = Math.floor(millis / 60000);
-    var seconds = ((millis % 60000) / 1000).toFixed(0);
+    var seconds = Number.parseInt(((millis % 60000) / 1000).toFixed(0));
     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
   }
-  
-  
-
