@@ -66,8 +66,6 @@ app.post('/generate', (req, res) => {
 
 
   res.render("generate")
-
-  res.render("generate")
   //take a search term from the user and search for playlists
   console.log("searching for playlists");
   let dummy_text = "rock";
