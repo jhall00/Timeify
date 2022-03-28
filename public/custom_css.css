@@ -7,7 +7,7 @@
   /*
   CSS for the search popup
   */
-  .search {
+  .search-popup {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -40,5 +40,10 @@
   .close:focus {
     color: #000;
     text-decoration: none;
+    cursor: pointer;
+  }
+
+  #popup-albPly-btn {
+    text-align: center;
     cursor: pointer;
   }
