@@ -4,14 +4,11 @@ const path = require('path');
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
-var port = process.env.PORT || 8080;
-
 
 const SpotifyWebApi = require('spotify-web-api-node');
 const express = require('express');
 var bodyParser = require('body-parser');
 const { ModifierFlags } = require('typescript');
-
 
 
 
@@ -254,7 +251,7 @@ app.get('/callback', (req, res) => {
   });
 
 
-  app.listen(port, () =>
+  app.listen(8888, () =>
     console.log(
       'HTTP Server up. Now go to http://localhost:8888/loginLanding in your browser.'
     )
