@@ -54,7 +54,7 @@ app.get('/loginLanding', (req, res) => {
 
 app.get('/generate', (req, res) => {
   // res.sendFile(path.join(__dirname, 'public/login.html'));
-  res.render("generate")
+  // res.render("generate")
 });
 
 app.post('/generate', (req, res) => {
