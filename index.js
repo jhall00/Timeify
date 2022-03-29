@@ -4,6 +4,10 @@ const path = require('path');
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
+// uncomment this redirect_uri and comment above if you want to run it locally, not on heroku
+// const REDIRECT_URI = process.env.REDIRECT_URI_LOCAL;
+const port = process.env.PORT || 8888;
+
 
 const SpotifyWebApi = require('spotify-web-api-node');
 const express = require('express');
@@ -291,7 +295,7 @@ app.get('/callback', (req, res) => {
   });
 
 
-  app.listen(8888, () =>
+  app.listen(port, () =>
     console.log(
       'HTTP Server up. Now go to http://localhost:8888 in your browser.'
     )
