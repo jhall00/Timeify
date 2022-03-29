@@ -191,7 +191,7 @@ app.post('/player', (req, res) => {
   }
 
 
-  if(req.body.action == "start"){
+  else if(req.body.action == "start"){
 
   // first time user clicks play
 
