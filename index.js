@@ -177,61 +177,61 @@ app.get('/player', (req, res) => {
 });
 
 
-// app.post('/player', (req, res) => {
+app.post('/player', (req, res) => {
 
-//   var pID = "37i9dQZF1DZ06evO0ENBD2"
-//   var type ="playlist"
+  var pID = "37i9dQZF1DZ06evO0ENBD2"
+  var type ="playlist"
 
-//   if(req.body.action == "connect_player" ){
-//     // transfer playing to our web device
-//     spotifyApi.transferMyPlayback([req.body.device_id])
-//     .then(function() {
-//       console.log('Transfering playback to ' + req.body.device_id);
-//       res.json({msg:"transferred"})
-//     }, function(err) {
-//       //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
-//       console.log('Something went wrong!', err);
-//     });
-//   }
-
-
-//   else if(req.body.action == "start"){
-
-//   // first time user clicks play
-
-//     playerURI = {context_uri:"spotify:"+type+":"+pID};
-//     spotifyApi.play(playerURI)
-//     .then(function() {
-//       console.log('Playback started');
-//     }, function(err) {
-//       //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
-//       console.log('Something went wrong!', err);
-//     });
-//   }
-
-//   // else if(req.body.action == "resume"){
-//   //   spotifyApi.play()
-//   //   .then(function() {
-//   //     console.log('Playback started');
-//   //   }, function(err) {
-//   //     //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
-//   //     console.log('Something went wrong!', err);
-//   //   });
-//   // }
-
-//   // else if(req.body.action == "pause"){
-//   //   spotifyApi.pause()
-//   //   .then(function() {
-//   //     console.log('Playback paused');
-//   //   }, function(err) {
-//   //     //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
-//   //     console.log('Something went wrong!', err);
-//   //   });
-//   // }
+  if(req.body.action == "connect_player" ){
+    // transfer playing to our web device
+    spotifyApi.transferMyPlayback([req.body.device_id])
+    .then(function() {
+      console.log('Transfering playback to ' + req.body.device_id);
+      res.json({msg:"transferred"})
+    }, function(err) {
+      //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
+      console.log('Something went wrong!', err);
+    });
+  }
 
 
+  else if(req.body.action == "start"){
 
-// })
+  // first time user clicks play
+
+    playerURI = {context_uri:"spotify:"+type+":"+pID};
+    spotifyApi.play(playerURI)
+    .then(function() {
+      console.log('Playback started');
+    }, function(err) {
+      //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
+      console.log('Something went wrong!', err);
+    });
+  }
+
+  // else if(req.body.action == "resume"){
+  //   spotifyApi.play()
+  //   .then(function() {
+  //     console.log('Playback started');
+  //   }, function(err) {
+  //     //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
+  //     console.log('Something went wrong!', err);
+  //   });
+  // }
+
+  // else if(req.body.action == "pause"){
+  //   spotifyApi.pause()
+  //   .then(function() {
+  //     console.log('Playback paused');
+  //   }, function(err) {
+  //     //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
+  //     console.log('Something went wrong!', err);
+  //   });
+  // }
+
+
+
+})
 
 // function openSourceSearch() {
 //   document.getElementById("mySearch").style.display = "block";
