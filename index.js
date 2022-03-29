@@ -54,29 +54,37 @@ app.get('/loginLanding', (req, res) => {
 
 app.get('/generate', (req, res) => {
   // res.sendFile(path.join(__dirname, 'public/login.html'));
-  // res.render("generate")
+  res.render("generate")
 });
 
 app.post('/generate', (req, res) => {
   // req.body object has your form values
-  console.log(req.body.length_minutes)
-  console.log(req.body.length_seconds)
-  console.log(req.body.mySource)
-  console.log(req.body.newName)
 
 
-  res.render("generate")
-  //take a search term from the user and search for playlists
-  console.log("searching for playlists");
-  let dummy_text = "rock";
-  spotifyApi.searchPlaylists(dummy_text, { limit: 5 }).then(function (data) {
-    console.log(data.body.playlists);
+  //receive data from when generate button is clicked
+  if(req.body.action == "generate" ){
+    console.log(req.body.length_minutes)
+    console.log(req.body.length_seconds)
+    console.log(req.body.mySource)
+    console.log(req.body.newName)
   }
-  ).catch(function (err) {
-    console.log(err);
-  });
-  // app.use(express.static(__dirname + '/public'));
 
+
+  // receive data from when search button is clicked
+
+  else if(req.body.action == "search" ){
+
+    // res.render("generate")
+    //take a search term from the user and search for playlists
+    console.log("searching for playlists");
+    let dummy_text = "rock";
+    spotifyApi.searchPlaylists(dummy_text, { limit: 5 }).then(function (data) {
+      console.log(data.body.playlists);
+    }
+    ).catch(function (err) {
+      console.log(err);
+    });
+  }
 
 
   // spotifyApi.getPlaylist(req.body.playlistID)
