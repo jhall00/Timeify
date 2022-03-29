@@ -35,7 +35,7 @@
                     <div class = "bg-gradient-to-br from-green_grad1 to-green_grad2 backdrop-blur-lg shadow-lg w-5/6 h-max rounded-2xl p-10">
     
                     <div class = "flex justify-center">
-                        <form action="/generate" method="post">
+                        <form action="/load" method="post">
     
                             <div class="md:flex md:items-center mb-6">
                                 <div class="w-full">
@@ -47,30 +47,38 @@
                                 
                             </div>
     
-                            <div class="search-popup" id="mySearch">
-                                <div class="search-content rounded-xl">
-                                    <span class="close">&times;</span>
-                                    <h1 style="font-size: 40px;">Spotify Music Search</h1>
-                                    <p>Enter search term</p>
-                                    <input class="font-montserrat bg-gray-200 appearance-none border-2 border-gray-200 rounded w-fit py-2 pl-3 pr-8 ml-3 text-gray-700 leading-tight focus:outline-none focus:bg-white" id="new_name" type="text" name="newName"><br>
-                                    <br>
-                                    <input class = "font-montserrat bg-mint hover:bg-shadow_mint text-black font-bold py-3 px-4 rounded-xl drop-shadow-md" type="submit" value="Search" name="search"/><br><br><hr>
-                                    <br>
-                                    <div id="popup-albPly-btn">
-                                        <input class=" font-montserrat  text-black py-3 px-4 rounded-xl drop-shadow-md" type="button" value="Albums" name="albums" id="popup-albPly-btn"/>
-                                        <input class=" font-montserrat  text-black py-3 px-4 rounded-xl drop-shadow-md" type="button" value="Playlists" name="playlists" id="popup-albPly-btn"/>
-                                    </div>
-                                </div>
-                            </div>
+                           
 
                             
                             <div class="md:flex justify-center">
-                                <input class = "font-montserrat bg-mint hover:bg-shadow_mint text-black font-bold py-3 px-4 rounded-xl drop-shadow-md" type="submit" value="Generate"/><br><br><hr>
+                                <input class = "font-montserrat bg-mint hover:bg-shadow_mint text-black font-bold py-3 px-4 rounded-xl drop-shadow-md" type="submit" id = "loadSubmit" value="Load"/><br><br><hr>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
+            </div>
+            <div class="search-popup" id="mySearch">
+                <div class="search-content rounded-xl">
+                    <span class="close">&times;</span>
+                    <h1 style="font-size: 40px;">Spotify Music Search</h1>
+                    <p>Enter search term</p>
+                    <input
+                        class="font-montserrat bg-gray-200 appearance-none border-2 border-gray-200 rounded w-fit py-2 pl-3 pr-8 ml-3 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+                        id="search_term" type="text" name="search_term"><br>
+                    <br>
+                    <input
+                        class="font-montserrat bg-mint hover:bg-shadow_mint text-black font-bold py-3 px-4 rounded-xl drop-shadow-md"
+                        id = "searchSubmit" type="submit" value="Search" name="search" /><br><br>
+                    <hr>
+                    <br>
+                    <div id="popup-albPly-btn">
+                        <input class=" font-montserrat  text-black py-3 px-4 rounded-xl drop-shadow-md" type="button" value="Albums"
+                            name="albums" id="popup-albPly-btn" />
+                        <input class=" font-montserrat  text-black py-3 px-4 rounded-xl drop-shadow-md" type="button"
+                            value="Playlists" name="playlists" id="popup-albPly-btn" />
+                    </div>
+                </div>
             </div>
         </div>
     

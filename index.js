@@ -61,18 +61,10 @@ app.post('/generate', (req, res) => {
   // req.body object has your form values
 
 
-  //receive data from when generate button is clicked
-  if(req.body.action == "generate" ){
-    console.log(req.body.length_minutes)
-    console.log(req.body.length_seconds)
-    console.log(req.body.mySource)
-    console.log(req.body.newName)
-  }
-
 
   // receive data from when search button is clicked
 
-  else if(req.body.action == "search" ){
+  if(req.body.action == "search" ){
 
     // res.render("generate")
     //take a search term from the user and search for playlists
@@ -84,6 +76,17 @@ app.post('/generate', (req, res) => {
     ).catch(function (err) {
       console.log(err);
     });
+  }
+
+  else{
+      //receive data from when generate button is clicked
+      console.log(req.body.length_minutes)
+      console.log(req.body.length_seconds)
+      console.log(req.body.mySource)
+      console.log(req.body.newName)
+    //
+  
+  
   }
 
 
@@ -100,8 +103,37 @@ app.get('/load', (req, res) => {
 
 });
 
+app.post('/load', (req, res) => {
+  // req.body object has your form values
+
+
+  // receive data from when search button is clicked
+
+  if(req.body.action == "search" ){
+
+    // res.render("generate")
+    //take a search term from the user and search for playlists
+    console.log("searching for playlists");
+    let dummy_text = "rock";
+    spotifyApi.searchPlaylists(dummy_text, { limit: 5 }).then(function (data) {
+      console.log(data.body.playlists);
+    }
+    ).catch(function (err) {
+      console.log(err);
+    });
+  }
+
+  else{
+    
+  //receive data from when load button is clicked
+  }
+
+
+
+});
+
+
 app.get('/player', (req, res) => {
-  https://open.spotify.com/playlist/0VZG0s66JThdEbZ1jrjDAf?si=4d462e01fc9f4fcf
   var pID = "37i9dQZF1DZ06evO0ENBD2"
   var songs = []
   var playlistTitle =""
