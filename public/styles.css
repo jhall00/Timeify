@@ -491,10 +491,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   right: 0px;
 }
 
-.m-6{
-  margin: 1.5rem;
-}
-
 .m-8{
   margin: 2rem;
 }
@@ -891,6 +887,78 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-backdrop-blur: blur(16px);
   -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
           backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+}
+
+.search-popup {
+  display: none;
+  /* Hidden by default */
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0px;
+  top: 0px;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+  --tw-bg-opacity: 0.4;
+  padding-top: 6rem;
+  overflow: auto;
+  /* Enable scroll if needed */
+}
+
+.search-content{
+  margin: auto;
+  border-width: 2px;
+  border-style: solid;
+  --tw-border-opacity: 1;
+  border-color: rgb(107 114 128 / var(--tw-border-opacity));
+  padding: 1.25rem;
+  width: 80%;
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 250 252 / var(--tw-bg-opacity));
+}
+
+.close{
+  --tw-text-opacity: 1;
+  color: rgb(156 163 175 / var(--tw-text-opacity));
+  float: right;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+}
+
+.close:hover{
+  cursor: pointer;
+}
+
+.close:focus{
+  cursor: pointer;
+}
+
+.close:hover{
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+  -webkit-text-decoration-line: none;
+          text-decoration-line: none;
+}
+
+.close:focus{
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+  -webkit-text-decoration-line: none;
+          text-decoration-line: none;
+}
+
+#popup-albPly-btn{
+  cursor: pointer;
+  text-align: center;
+}
+
+#searchBtn{
+  margin-right: 2rem;
+  width: 100%;
+  text-align: center;
 }
 
 .hover\:bg-shadow_mint:hover{
