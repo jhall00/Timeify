@@ -1,31 +1,33 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- for tailwind (uncomment when ready to use) -->
-    <link rel="stylesheet" href = "/styles.css">
-    <link rel="stylesheet" href = "/custom_css.css">
+    <link rel="stylesheet" href="/styles.css">
 
     <title>Generate</title>
 </head>
+
 <body class="bg-main-background bg-cover ">
     <p>Generate Page</p>
     <!-- <a href="http://localhost:8888/login">
         <input type="button" value="Log in" />
      </a> -->
-    <div class = "flex justify-center">
+    <div class="flex justify-center">
 
-        <div class = "bg-gradient-to-r from-white_grad1 to-white_grad2 backdrop-blur-lg shadow-lg w-5/6 h-max rounded-2xl pb-16">
+        <div
+            class="bg-gradient-to-r from-white_grad1 to-white_grad2 backdrop-blur-lg shadow-lg w-5/6 h-max rounded-2xl pb-16">
 
             <!-- nav bar -->
 
             <div class="bg-transparent_white w-full h-14 rounded-t-2xl ">
                 <div class="flex justify-end">
 
-                <a class = "pr-3" href="http://localhost:8888/generate">Generate</a>
+                    <a class="pr-3" href="http://localhost:8888/generate">Generate</a>
 
-                <a class = "pr-3" href="http://localhost:8888/load">Load</a>
+                    <a class="pr-3" href="http://localhost:8888/load">Load</a>
 
 
                 </div>
@@ -33,117 +35,151 @@
 
             </div>
 
-            <p class = "flex justify-center p-8 font-montserrat text-2xl text-main-green">Create a new timed playlist.</p>
+            <p class="flex justify-center p-8 font-montserrat text-2xl text-main-green">Create a new timed playlist.</p>
 
-            <div class = "flex justify-center">
-                <div class = "bg-gradient-to-br from-green_grad1 to-green_grad2 backdrop-blur-lg shadow-lg w-5/6 h-max rounded-2xl p-10">
+            <div class="flex justify-center">
+                <div
+                    class="bg-gradient-to-br from-green_grad1 to-green_grad2 backdrop-blur-lg shadow-lg w-5/6 h-max rounded-2xl p-10">
 
-                <div class = "flex justify-center">
-                    <form action="/action_page.php" method="get">
+                    <div class="flex justify-center">
+                        <form action="/action_page.php" method="get">
 
-                        <div class="md:flex md:items-center mb-6">
-                            <div class="w-full">
-                            <label class="font-montserrat block text-white font-bold md:text-left mb-1 md:mb-0 pr-1" for="length_minutes">
-                                Timer Length
-                            </label>
-                            </div>
-                            <div class="relative md:w-2/3">
-                                <select class="font-montserrat bg-gray-200 appearance-none border-2 border-gray-200 rounded w-fit py-2 pl-3 pr-8 text-gray-700 leading-tight focus:outline-none focus:bg-white" id="length_minutes" type="text" name="length_minutes">
-                                    <option value="" disabled selected>Minutes</option>
+                            <div class="md:flex md:items-center mb-6">
+                                <div class="w-full">
+                                    <label
+                                        class="font-montserrat block text-white font-bold md:text-left mb-1 md:mb-0 pr-1"
+                                        for="length_minutes">
+                                        Timer Length
+                                    </label>
+                                </div>
+                                <div class="relative md:w-2/3">
+                                    <select
+                                        class="font-montserrat bg-gray-200 appearance-none border-2 border-gray-200 rounded w-fit py-2 pl-3 pr-8 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+                                        id="length_minutes" type="text" name="length_minutes">
+                                        <option value="" disabled selected>Minutes</option>
 
 
-                                    <% var i = 0%>
-                                    <% while (i <= 500) { %>
-                                        <option><%=i%></option>
-                                        <% i ++ }%>
+                                        <% var i=0%>
+                                            <% while (i <=500) { %>
+                                                <option>
+                                                    <%=i%>
+                                                </option>
+                                                <% i ++ }%>
 
-                                </select>
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                    </select>
+                                    <div
+                                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20">
+                                            <path
+                                                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                        </svg>
+                                    </div>
+
                                 </div>
 
-                            </div>
+                                <div class="relative md:w-2/3">
+                                    <select
+                                        class="font-montserrat bg-gray-200 appearance-none border-2 border-gray-200 rounded w-fit py-2 pl-3 pr-8 ml-2 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+                                        id="length_seconds" type="text" name="length_seconds">
+                                        <option value="" disabled selected>Seconds</option>
 
-                            <div class="relative md:w-2/3">
-                                <select class="font-montserrat bg-gray-200 appearance-none border-2 border-gray-200 rounded w-fit py-2 pl-3 pr-8 ml-2 text-gray-700 leading-tight focus:outline-none focus:bg-white" id="length_seconds" type="text" name="length_seconds">
-                                    <option value="" disabled selected>Seconds</option>
-
-                                    <% var i = 0%>
-                                    <% while (i < 60) { %>
-                                        <option><%=i%></option>
-                                        <% i += 5 }%>
+                                        <% var i=0%>
+                                            <% while (i < 60) { %>
+                                                <option>
+                                                    <%=i%>
+                                                </option>
+                                                <% i +=5 }%>
 
 
-                                </select>
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                    </select>
+                                    <div
+                                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20">
+                                            <path
+                                                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                        </svg>
+                                    </div>
+
                                 </div>
+                            </div>
+
+
+                            <div class="md:flex md:items-center mb-6">
+                                <div class="w-full">
+                                    <label
+                                        class="font-montserrat block text-white font-bold md:text-left mb-1 md:mb-0 pr-1"
+                                        for="my_source">
+                                        Source
+                                    </label>
+                                </div>
+                                <button
+                                    class="font-montserrat bg-mint hover:bg-shadow_mint text-black font-bold src-button py-3 px-4 rounded-xl drop-shadow-md"
+                                    id="searchBtn">Source</button>
 
                             </div>
-                        </div>
 
 
-                        <div class="md:flex md:items-center mb-6">
-                            <div class="w-full">
-                                <label class="font-montserrat block text-white font-bold md:text-left mb-1 md:mb-0 pr-1" for="my_source">
-                                    Source
-                                </label>
+
+
+                            <div class="md:flex md:items-center mb-6">
+                                <div class="w-full">
+                                    <label
+                                        class="font-montserrat block text-white font-bold md:text-left mb-1 md:mb-0 pr-1"
+                                        for="new_name">
+                                        New Timer Name
+                                    </label>
+                                </div>
+                                <input
+                                    class="font-montserrat bg-gray-200 appearance-none border-2 border-gray-200 rounded w-fit py-2 pl-3 pr-8 ml-3 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+                                    id="new_name" type="text" name="newName">
                             </div>
-                                <button class = "font-montserrat bg-mint hover:bg-shadow_mint text-black font-bold src-button py-3 px-4 rounded-xl drop-shadow-md" id="searchBtn">Source</button>
-
-                        </div>
-
-             
-
-
-                        <div class="md:flex md:items-center mb-6">
-                            <div class="w-full">
-                                <label class="font-montserrat block text-white font-bold md:text-left mb-1 md:mb-0 pr-1" for="new_name">
-                                    New Timer Name
-                                </label>
+                            <div class="md:flex justify-center">
+                                <input
+                                    class="font-montserrat bg-mint hover:bg-shadow_mint text-black font-bold py-3 px-4 rounded-xl drop-shadow-md"
+                                    type="submit" id="generateSubmit" value="Generate" /><br><br>
+                                <hr>
                             </div>
-                                <input class="font-montserrat bg-gray-200 appearance-none border-2 border-gray-200 rounded w-fit py-2 pl-3 pr-8 ml-3 text-gray-700 leading-tight focus:outline-none focus:bg-white" id="new_name" type="text" name="newName">
-                        </div>
-                        <div class="md:flex justify-center">
-                            <input class = "font-montserrat bg-mint hover:bg-shadow_mint text-black font-bold py-3 px-4 rounded-xl drop-shadow-md" type="submit" id = "generateSubmit" value="Generate"/><br><br><hr>
-                        </div>
 
-                    </form>
+                        </form>
 
-                </div>
-            </div>
-
-            </div>
-        </div>
-        </div>
-
-            <div class="search-popup" id="mySearch">
-                <div class="search-content rounded-xl">
-                    <span class="close">&times;</span>
-                    <h1 style="font-size: 40px;">Spotify Music Search</h1>
-                    <p>Enter search term</p>
-                    <input
-                        class="font-montserrat bg-gray-200 appearance-none border-2 border-gray-200 rounded w-fit py-2 pl-3 pr-8 ml-3 text-gray-700 leading-tight focus:outline-none focus:bg-white"
-                        id="search_term" type="text" name="searchTerm"><br>
-                    <br>
-                    <input
-                        class="font-montserrat bg-mint hover:bg-shadow_mint text-black font-bold py-3 px-4 rounded-xl drop-shadow-md"
-                        id = "searchSubmit" type="submit" value="Search" name="search" /><br><br>
-                    <hr>
-                    <br>
-                    <div id="popup-albPly-btn">
-                        <input class=" font-montserrat  text-black py-3 px-4 rounded-xl drop-shadow-md" type="button" value="Albums"
-                            name="albums" id="popup-albPly-btn" />
-                        <input class=" font-montserrat  text-black py-3 px-4 rounded-xl drop-shadow-md" type="button"
-                            value="Playlists" name="playlists" id="popup-albPly-btn" />
                     </div>
                 </div>
+
             </div>
-        <a href="/player">
-            <button class = "justify-center font-montserrat bg-white hover:bg-shadow_mint text-black font-bold src-button py-3 px-4 rounded-xl drop-shadow-md" >Hard-coded link to player</button>
-        </a>
-        <!-- A Button that calls search when clicked -->
-        <button id="test" class="text-slate-50 text-center font-bold px-12 bg-dark-gray hover:bg-dark-gray
+        </div>
+    </div>
+
+    <div class="search-popup" id="mySearch">
+        <div class="search-content rounded-xl">
+            <span class="close">&times;</span>
+            <h1 style="font-size: 40px;">Spotify Music Search</h1>
+            <p>Enter search term</p>
+            <input
+                class="font-montserrat bg-gray-200 appearance-none border-2 border-gray-200 rounded w-fit py-2 pl-3 pr-8 ml-3 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+                id="search_term" type="text" name="searchTerm"><br>
+            <br>
+            <input
+                class="font-montserrat bg-mint hover:bg-shadow_mint text-black font-bold py-3 px-4 rounded-xl drop-shadow-md"
+                id="searchSubmit" type="submit" value="Search" name="search" /><br><br>
+            <hr>
+            <br>
+            <div id="popup-albPly-btn">
+                <input class=" font-montserrat  text-black py-3 px-4 rounded-xl drop-shadow-md" type="button"
+                    value="Albums" name="albums" id="popup-albPly-btn" />
+                <input class="font-montserrat  text-black py-3 px-4 rounded-xl drop-shadow-md" type="button"
+                    value="Playlists" name="playlists" id="popup-albPly-btn" />
+            </div>
+        </div>
+    </div>
+    <a href="/player">
+        <button
+            class="justify-center font-montserrat bg-white hover:bg-shadow_mint text-black font-bold src-button py-3 px-4 rounded-xl drop-shadow-md">Hard-coded
+            link to player</button>
+    </a>
+    <!-- A Button that calls search when clicked -->
+    <button id="test" class="text-slate-50 text-center font-bold px-12 bg-dark-gray hover:bg-dark-gray
         rounded-lg drop-shadow-md py-12 w-fit">Temporary Fake Search Button</button>
 
     </div>
@@ -153,16 +189,16 @@
         var search = document.getElementById("mySearch");
         var btn = document.getElementById("searchBtn");
         var span = document.getElementsByClassName("close")[0];
-        btn.onclick = function() {
+        btn.onclick = function () {
             search.style.display = "block";
             return false;
-        }
+        };
 
-        span.onclick = function() {
+        span.onclick = function () {
             search.style.display = "none";
-        }
+        };
 
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             if (event.target == search) {
                 search.style.display = "none";
             }
@@ -172,5 +208,5 @@
 
 
 </body>
-</html>
 
+</html>
