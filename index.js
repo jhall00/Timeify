@@ -45,7 +45,7 @@ app.use(express.static('public'));
 app.set("view engine", "ejs")
 
 
-app.get('/loginLanding', (req, res) => {
+app.get('/', (req, res) => {
   // res.sendFile(path.join(__dirname, 'public/login.html'));
   exStr = "passing data example from server to browser"
   res.render("login", {exStr})
@@ -293,7 +293,7 @@ app.get('/callback', (req, res) => {
 
   app.listen(8888, () =>
     console.log(
-      'HTTP Server up. Now go to http://localhost:8888/loginLanding in your browser.'
+      'HTTP Server up. Now go to http://localhost:8888 in your browser.'
     )
   );
 
