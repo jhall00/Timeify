@@ -273,7 +273,10 @@ app.get('/callback', (req, res) => {
         );
         // res.sendFile(path.join(__dirname, 'public/homePage.html'));
 
-        res.render("homePage")
+        // res.render("homePage")
+
+        res.redirect("/home")
+
 
         setInterval(async () => {
           const data = await spotifyApi.refreshAccessToken();
@@ -289,6 +292,13 @@ app.get('/callback', (req, res) => {
         res.send(`Error getting Tokens: ${error}`);
       });
   });
+
+
+  app.get('/home', (req, res) => {
+        res.render("homePage")
+
+  })
+
 
 
   app.listen(8888, () =>
