@@ -4,11 +4,13 @@ const path = require('path');
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
+const port = process.env.PORT || 8888;
+
 
 const SpotifyWebApi = require('spotify-web-api-node');
 const express = require('express');
 var bodyParser = require('body-parser');
-const { ModifierFlags } = require('typescript');
+// const { ModifierFlags } = require('typescript');
 
 
 
@@ -45,7 +47,7 @@ app.use(express.static('public'));
 app.set("view engine", "ejs")
 
 
-app.get('/loginLanding', (req, res) => {
+app.get('/', (req, res) => {
   // res.sendFile(path.join(__dirname, 'public/login.html'));
   exStr = "passing data example from server to browser"
   res.render("login", {exStr})
@@ -301,9 +303,9 @@ app.get('/callback', (req, res) => {
 
 
 
-  app.listen(8888, () =>
+  app.listen(port, () =>
     console.log(
-      'HTTP Server up. Now go to http://localhost:8888/loginLanding in your browser.'
+      'HTTP Server up. Now go to http://localhost:8888/ in your browser.'
     )
   );
 

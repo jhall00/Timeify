@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "Insert Timeify description here",
   "main": "index.js",
+  "engines": {
+    "node": "10.x"
+  },
   "dependencies": {
     "body-parser": "^1.19.2",
     "cors": "^2.8.5",
