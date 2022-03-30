@@ -5,34 +5,40 @@
 @tailwind utilities;
 
 .search-popup {
-    display: none; /* Hidden by default */
-    @apply fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    @apply left-0 top-0;
-    @apply w-full h-full bg-opacity-40 bg-black pt-24 fixed;
-    @apply overflow-auto; /* Enable scroll if needed */
-  }
+  display: none;
+  @apply fixed;
+  z-index: 1; /* Sit on top */
+  @apply left-0 top-0;
+  @apply w-full h-full bg-opacity-40 bg-black pt-24 fixed;
+  @apply overflow-auto; /* Enable scroll if needed */
+}
+
 .search-content {
-    @apply border-2 border-solid border-gray-500 p-5 m-auto;
-    @apply w-4/5;
-    @apply bg-slate-50;
-  }
+  @apply border-2 border-solid border-gray-500 p-5 m-auto;
+  @apply w-4/5;
+  @apply bg-slate-50;
+}
+
 .close {
-    @apply text-gray-400;
-    @apply float-right;
-    @apply text-3xl font-bold;
-    @apply hover:cursor-pointer focus:cursor-pointer;
-    @apply hover:text-black focus:text-black hover:no-underline focus:no-underline;
+  @apply text-gray-400;
+  @apply float-right;
+  @apply text-3xl font-bold;
+  @apply hover:cursor-pointer focus:cursor-pointer;
+  @apply hover:text-black focus:text-black hover:no-underline focus:no-underline;
 }
 
 #popup-albPly-btn {
-    @apply text-center cursor-pointer;
+  @apply text-center cursor-pointer;
 }
 
 #searchBtn {
-    @apply w-full text-center mr-8;
+  @apply w-full text-center mr-8;
 }
 
-body{
+body {
   @apply bg-main-background bg-cover;
+}
+
+.selected {
+  @apply border-4 border-solid border-gray-900;
 }

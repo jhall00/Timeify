@@ -55,8 +55,9 @@ app.get('/', (req, res) => {
 });
 
 app.get('/generate', (req, res) => {
+  var results =[];
   // res.sendFile(path.join(__dirname, 'public/login.html'));
-  res.render("generate")
+  res.render("generate", {results})
 });
 
 app.post('/generate', (req, res) => {
@@ -67,13 +68,26 @@ app.post('/generate', (req, res) => {
   // receive data from when search button is clicked
 
   if(req.body.action == "search" ){
-
+    console.log(req.body.type);
+    console.log(req.body.term);
     // res.render("generate")
     //take a search term from the user and search for playlists
+    let results = []
+    if (req.body.term = "album") {
+      let returned = spotifyApi.searchAlbums(req.body.term, { limit: 5 }).then(function (data) {
+        data.body.albums.items.forEach(function (item) {
+          results.push({ title: item.name, artists: item.artists });
+        });
+      });
+    }
     console.log("searching for playlists");
     let dummy_text = "rock";
-    spotifyApi.searchPlaylists(dummy_text, { limit: 5 }).then(function (data) {
+    spotifyApi.search(req.body.term,[req.body.type],{ limit: 5 }).then(function (data) {
+      console.log(data.body.albums);
+      console.log(data.body.artists);
       console.log(data.body.playlists);
+      console.log(data.body.playlists);
+      console.log("==============================")
     }
     ).catch(function (err) {
       console.log(err);
@@ -87,8 +101,8 @@ app.post('/generate', (req, res) => {
       console.log(req.body.mySource)
       console.log(req.body.newName)
     //
-  
-  
+
+
   }
 
 
@@ -126,7 +140,7 @@ app.post('/load', (req, res) => {
   }
 
   else{
-    
+
   //receive data from when load button is clicked
   }
 
