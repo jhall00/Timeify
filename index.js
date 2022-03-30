@@ -67,7 +67,7 @@ app.post('/generate', (req, res) => {
   // receive data from when search button is clicked
 
   if(req.body.action == "search" ){
-
+    console.log(req.body.type);
     // res.render("generate")
     //take a search term from the user and search for playlists
     console.log("searching for playlists");
@@ -87,8 +87,8 @@ app.post('/generate', (req, res) => {
       console.log(req.body.mySource)
       console.log(req.body.newName)
     //
-  
-  
+
+
   }
 
 
@@ -126,7 +126,7 @@ app.post('/load', (req, res) => {
   }
 
   else{
-    
+
   //receive data from when load button is clicked
   }
 
