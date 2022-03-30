@@ -95,7 +95,7 @@ function convertSeconds(s) {
     var min = Math.floor(s / 60).toString();
     var sec = (s % 60).toString();
     return min.padStart(2, '0') + ':' + sec.padStart(2, '0');
-  
+
 }
 
 function convertMStoS(ms){

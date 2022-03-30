@@ -1,6 +1,6 @@
-
+<!DOCTYPE html>
 <html lang="en">
-    
+
 
     <head>
         <meta charset="UTF-8">
@@ -8,11 +8,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- for tailwind (uncomment when ready to use) -->
         <link rel="stylesheet" href="/styles.css">
-    
+
         <title>Select A Playlist Length</title>
     </head>
-    
-    <body class="bg-main-background bg-cover">
+
+    <body>
         <div class="m-8 bg-gradient-to-r from-white_grad1 to-white_grad2 backdrop-blur-lg shadow-lg w-5/6 h-max rounded-2xl pb-16">
             <div class="flex justify-center">
                 <p id = "access"class ="hidden"> <%=access_token %></p>
@@ -25,15 +25,15 @@
                     </div>
                 </div>
             </div>
-            
+
             <p>Currently uses a hardcoded array of dummy song lengths, displays the options for a fifteen minute playlist over (left) and under (right).</p>
             <a id="playlistOver" class="hover:text-xl pr-6 font-montserrat font-bold text-main-green text-lg" href="/player">15:30</a>
 
             <a id="playlistUnder" class="hover:text-xl pr-6 font-montserrat font-bold text-main-green text-lg" href="/player"">15:00</a>
-        
+
         </div>
-    
+
         <script src="/playlists.js"></script>
     </body>
-    
+
     </html>
