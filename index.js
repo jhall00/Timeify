@@ -115,7 +115,9 @@ app.post('/generate', (req, res) => {
 });
 
 app.get('/load', (req, res) => {
-  res.render("load")
+  let results = []
+
+  res.render("load", {results})
 
 });
 
