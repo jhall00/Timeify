@@ -118,7 +118,6 @@ app.get('/load', (req, res) => {
   let results = []
 
   res.render("load", {results})
-
 });
 
 app.post('/load', (req, res) => {
