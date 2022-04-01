@@ -64,7 +64,6 @@ app.post('/generate', (req, res) => {
   // req.body object has your form values
 
 
-
   // receive data from when search button is clicked
 
   if(req.body.action == "search" ){
@@ -73,25 +72,33 @@ app.post('/generate', (req, res) => {
     // res.render("generate")
     //take a search term from the user and search for playlists
     let results = []
-    if (req.body.term = "album") {
+    if (req.body.type == "album") {
       let returned = spotifyApi.searchAlbums(req.body.term, { limit: 5 }).then(function (data) {
         data.body.albums.items.forEach(function (item) {
-          results.push({ title: item.name, artists: item.artists });
+          results.push({ title: item.name, artists: item.artists, cover_art : item.images[0].url });
         });
       });
+      Promise.all([returned]).then(() => {
+        res.send(results)
+        // res.render("generate")
+
+      })
+  
     }
-    console.log("searching for playlists");
-    let dummy_text = "rock";
-    spotifyApi.search(req.body.term,[req.body.type],{ limit: 5 }).then(function (data) {
-      console.log(data.body.albums);
-      console.log(data.body.artists);
-      console.log(data.body.playlists);
-      console.log(data.body.playlists);
-      console.log("==============================")
-    }
-    ).catch(function (err) {
-      console.log(err);
-    });
+
+
+    // console.log("searching for playlists");
+    // let dummy_text = "rock";
+    // spotifyApi.search(req.body.term,[req.body.type],{ limit: 5 }).then(function (data) {
+    //   console.log(data.body.albums);
+    //   console.log(data.body.artists);
+    //   console.log(data.body.playlists);
+    //   console.log(data.body.playlists);
+    //   console.log("==============================")
+    // }
+    // ).catch(function (err) {
+    //   console.log(err);
+    // });
   }
 
   else{
@@ -100,7 +107,6 @@ app.post('/generate', (req, res) => {
       console.log(req.body.length_seconds)
       console.log(req.body.mySource)
       console.log(req.body.newName)
-    //
 
 
   }

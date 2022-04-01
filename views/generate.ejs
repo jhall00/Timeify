@@ -157,19 +157,27 @@
         <div class="search-content rounded-xl">
             <span class="close">&times;</span>
             <h1 class="text-4xl">Spotify Music Search</h1>
-            <input
-                class="font-montserrat bg-gray-200 appearance-none border-2 border-gray-200 rounded w-fit py-2 pl-3 pr-8 ml-3 text-gray-700 leading-tight focus:outline-none focus:bg-white"
-                id="search_term" type="text" name="searchTerm" aria-label="Search" placeholder="Search"><br>
-            <input
-                class="font-montserrat bg-mint hover:bg-shadow_mint text-black font-bold py-3 px-4 rounded-xl drop-shadow-md"
-                id="searchSubmit" type="submit" value="Search" name="search" /><br><br>
+            <div class="flex mb-6 items-center">
+                <input
+                    class="font-montserrat bg-gray-200 appearance-none border-2 border-gray-200 rounded w-fit py-2 pl-3 pr-8 mt-4 mr-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+                    id="search_term" type="text" name="searchTerm" aria-label="Search" placeholder="Search"><br>
+                <input
+                    class="font-montserrat bg-mint hover:bg-shadow_mint text-black font-bold py-3 px-4 mt-4 rounded-xl drop-shadow-md"
+                    id="searchSubmit" type="submit" value="Search" name="search" /><br><br>
+            </div>
             <hr>
             <br>
-            <div id="popup-albPly-btn">
+            <div class="mb-4" id="popup-albPly-btn">
                 <input class="font-montserrat text-black py-3 px-4 rounded-xl drop-shadow-md selected" type="button" value="Albums"
                     name="albums" id="album_button" />
+
                 <input class=" font-montserrat  text-black py-3 px-4 rounded-xl drop-shadow-md" type="button"
                     value="Playlists" name="playlists" id="playlist_button" />
+
+            </div>
+            <div class="flex" id="searchResults">
+
+
             </div>
             <div>
                 <% if (results.length > 0) { %>
@@ -177,9 +185,7 @@
                         <p>
                             <%=result.title%>
                         </p>
-                        <% result.artists.forEach(artist => { %>
-                            <%=result.name%>
-                        <% }) %>
+
                     <% }) %>
                 <% } %>
             </div>
