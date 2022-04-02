@@ -185,8 +185,9 @@ app.get('/playlists', (req, res) => {
 });
 
 
-app.get('/player', (req, res) => {
-  var pID = "37i9dQZF1DZ06evO0ENBD2"
+app.get('/player/:ID', (req, res) => {
+  // var pID = "37i9dQZF1DZ06evO0ENBD2"
+  var pID = String(req.params.ID)
   var songs = []
   var playlistTitle =""
   var cover_art =""
@@ -225,9 +226,11 @@ app.get('/player', (req, res) => {
 });
 
 
-app.post('/player', (req, res) => {
+app.post('/player/:ID', (req, res) => {
 
-  var pID = "37i9dQZF1DZ06evO0ENBD2"
+  var url = req.headers.referer
+  var pID = url.substring(url.lastIndexOf('/') + 1);
+
   var type ="playlist"
 
   if(req.body.action == "connect_player" ){

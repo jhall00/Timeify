@@ -92,11 +92,11 @@ window.onSpotifyWebPlaybackSDKReady = () => {
         ppButton.classList.remove("paused");
         ppButton.classList.add("playing");
 
-        ppButtonIcon.src="./pauseButton.svg";
+        ppButtonIcon.src="/pauseButton.svg";
 
 
         //send status of what action/ api call we want to make to index.js with post
-        const response = await fetch('/player', {
+        const response = await fetch('/player/:ID', {
             method: 'POST',
             headers: {
               'Accept': 'application/json, text/plain, */*',
@@ -115,7 +115,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
      
         ppButton.classList.remove("paused");
         ppButton.classList.add("playing");
-        ppButtonIcon.src="./pauseButton.svg";
+        ppButtonIcon.src="/pauseButton.svg";
         player.togglePlay();
 
     }
@@ -123,7 +123,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
     else if (ppButton.classList.contains("playing")){
       ppButton.classList.remove("playing");
       ppButton.classList.add("paused");
-      ppButtonIcon.src="./playButton.svg";
+      ppButtonIcon.src="/playButton.svg";
       player.togglePlay();
 
 
@@ -136,7 +136,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
 
 
 async function sendDeviceID(device_id){
-  const response = await fetch('/player', {
+  const response = await fetch('/player/:ID', {
     method: 'POST',
     headers: {
       'Accept': 'application/json, text/plain, */*',
