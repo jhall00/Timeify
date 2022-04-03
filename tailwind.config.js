@@ -18,11 +18,14 @@ module.exports = {
       'gray-shadow': '#787878',
       'dark-gray': '#303030'
 
-    },
-    backgroundImage: {
-      'main-background': "url('/page_background.png')",
+      },
+      backgroundImage: {
+        'main-background': "url('/page_background.png')",
 
-    },
+      },
+      width: {
+        '450': '450px',
+      },
     },
 
   },

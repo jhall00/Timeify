@@ -243,12 +243,23 @@ app.post('/player/:ID', (req, res) => {
       //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
       console.log('Something went wrong!', err);
     });
+
+
+
   }
 
 
   if(req.body.action == "start"){
 
   // first time user clicks play
+
+  spotifyApi.setShuffle(false)
+  .then(function() {
+    console.log('Shuffle is off.');
+  }, function  (err) {
+    //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
+    console.log('Something went wrong!', err);
+  });
 
     playerURI = {context_uri:"spotify:"+type+":"+pID};
     spotifyApi.play(playerURI)
@@ -260,25 +271,25 @@ app.post('/player/:ID', (req, res) => {
     });
   }
 
-  // else if(req.body.action == "resume"){
-  //   spotifyApi.play()
-  //   .then(function() {
-  //     console.log('Playback started');
-  //   }, function(err) {
-  //     //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
-  //     console.log('Something went wrong!', err);
-  //   });
-  // }
+  else if(req.body.action == "shuffle_on"){
+    spotifyApi.setShuffle(true)
+    .then(function() {
+      console.log('Shuffle is on.');
+    }, function  (err) {
+      //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
+      console.log('Something went wrong!', err);
+    });
+  }
 
-  // else if(req.body.action == "pause"){
-  //   spotifyApi.pause()
-  //   .then(function() {
-  //     console.log('Playback paused');
-  //   }, function(err) {
-  //     //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
-  //     console.log('Something went wrong!', err);
-  //   });
-  // }
+  else if(req.body.action == "shuffle_off"){
+    spotifyApi.setShuffle(false)
+    .then(function() {
+      console.log('Shuffle is off.');
+    }, function  (err) {
+      //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
+      console.log('Something went wrong!', err);
+    });
+  }
 
 
 

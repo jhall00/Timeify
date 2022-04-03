@@ -165,6 +165,48 @@ window.onload = function(){
   var playlistLengthLabel = document.getElementById("playerLengthLabel")
   playlistLengthLabel.innerHTML = convertMsToTime(parseInt(playlistLengthStr))
 
+  var shuffleButton = document.getElementById("shuffle")
+
+
+  shuffleButton.addEventListener("click", function(){
+
+    if(shuffleButton.classList.contains("shuffle_off")){
+      shuffleButton.src = "/shuffle_selected.png"
+      shuffleButton.classList.remove('shuffle_off')
+      shuffleButton.classList.add('shuffle_on')
+
+      const response = fetch('/player/:ID', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({action:"shuffle_on"})
+      }).then(res => res.json())
+        .then(res => console.log(res));
+
+    }
+
+    else{
+      shuffleButton.src = "/shuffle_unselected.png"
+      shuffleButton.classList.remove('shuffle_on')
+      shuffleButton.classList.add('shuffle_off')
+
+      const response =  fetch('/player/:ID', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({action:"shuffle_off"})
+      }).then(res => res.json())
+        .then(res => console.log(res));
+    }
+
+  })
+
+
+
 
 
 var counter = 0
