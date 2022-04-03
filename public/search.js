@@ -21,18 +21,22 @@ test.addEventListener('click', async _ => {
   }).then(res => res.json())
     .then((function (res) {
       console.log(res);
-      res.forEach(element => 
-        searchResultsHTML +=  
-        "<div class='border-solid rounded-lg border-4 mx-2 w-1/5'>"+
-        "<img src='"+ element.cover_art + "'<"+
-        "<img>  </img>"+
-        "<p>"+element.title+"</p>"+
-        "<p>"+element.artists[0].name+"</p>"+
-    "</div>"
+      res.forEach(function(element) {
+          searchResultsHTML += "<div class='border-solid rounded-lg border-4 mx-2 w-1/5'>" +
+            "<img class='cover_art' src='" + element.cover_art + "'>" +
+            "<p>" + element.title + "</p>";
+          if (isSelected(album_button)) {
+            searchResultsHTML += "<p>" + element.artists[0].name + "</p>";
+          } else {
+            searchResultsHTML += "<p>" + element.owner + "</p>";
+          }
+          searchResultsHTML += "</div>";
+          return searchResultsHTML;
+        }
       );
 
       document.getElementById("searchResults").innerHTML = searchResultsHTML
-     
+
     }));
 
 });

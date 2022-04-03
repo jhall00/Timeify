@@ -495,50 +495,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   right: 0px;
 }
 
-.top-0{
-  top: 0px;
-}
-
-.top-3{
-  top: 0.75rem;
-}
-
-.right-10{
-  right: 2.5rem;
-}
-
-.right-7{
-  right: 1.75rem;
-}
-
-.right-5{
-  right: 1.25rem;
-}
-
-.right-6{
-  right: 1.5rem;
-}
-
-.right-2{
-  right: 0.5rem;
-}
-
-.left-10{
-  left: 2.5rem;
-}
-
-.right-32{
-  right: 8rem;
-}
-
-.right-28{
-  right: 7rem;
-}
-
-.right-24{
-  right: 6rem;
-}
-
 .right-20{
   right: 5rem;
 }
@@ -1097,6 +1053,15 @@ body{
   border-style: solid;
   --tw-border-opacity: 1;
   border-color: rgb(17 24 39 / var(--tw-border-opacity));
+}
+
+.cover_art{
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  width: 20%;
+  border-radius: 0.5rem;
+  border-width: 4px;
+  border-style: solid;
 }
 
 .hover\:cursor-pointer:hover{

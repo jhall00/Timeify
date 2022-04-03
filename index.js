@@ -71,34 +71,25 @@ app.post('/generate', (req, res) => {
     console.log(req.body.term);
     // res.render("generate")
     //take a search term from the user and search for playlists
-    let results = []
+    let results = [];
+    let returned;
     if (req.body.type == "album") {
-      let returned = spotifyApi.searchAlbums(req.body.term, { limit: 5 }).then(function (data) {
+      returned = spotifyApi.searchAlbums(req.body.term, { limit: 5 }).then(function (data) {
         data.body.albums.items.forEach(function (item) {
           results.push({ title: item.name, artists: item.artists, cover_art : item.images[0].url });
         });
       });
-      Promise.all([returned]).then(() => {
-        res.send(results)
-        // res.render("generate")
-
-      })
-  
+    } else {
+      returned = spotifyApi.searchPlaylists(req.body.term, { limit: 5 }).then(function (data) {
+        data.body.playlists.items.forEach(function (item) {
+          results.push({ title: item.name, artists: [item.owner.display_name], cover_art : item.images[0].url });
+        });
+        res.send(results);
+      });
     }
-
-
-    // console.log("searching for playlists");
-    // let dummy_text = "rock";
-    // spotifyApi.search(req.body.term,[req.body.type],{ limit: 5 }).then(function (data) {
-    //   console.log(data.body.albums);
-    //   console.log(data.body.artists);
-    //   console.log(data.body.playlists);
-    //   console.log(data.body.playlists);
-    //   console.log("==============================")
-    // }
-    // ).catch(function (err) {
-    //   console.log(err);
-    // });
+    Promise.all([returned]).then(() => {
+      res.send(results)
+    });
   }
 
   else{
