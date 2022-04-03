@@ -82,9 +82,9 @@ app.post('/generate', (req, res) => {
     } else {
       returned = spotifyApi.searchPlaylists(req.body.term, { limit: 5 }).then(function (data) {
         data.body.playlists.items.forEach(function (item) {
-          results.push({ title: item.name, artists: [item.owner.display_name], cover_art : item.images[0].url });
+          results.push({ title: item.name, owner: item.owner.display_name, cover_art : item.images[0].url });
         });
-        res.send(results);
+        // res.send(results);
       });
     }
     Promise.all([returned]).then(() => {
