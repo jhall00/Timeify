@@ -45,5 +45,5 @@ body {
 
 .cover_art {
   @apply rounded-sm;
-  @apply border-solid rounded-lg border-4 mx-2 w-1/5;
+  @apply border-solid rounded-lg border-4 mx-2;
 }
