@@ -48,6 +48,7 @@ album_button.addEventListener('click', async _ => {
     //If we are not selected, select us!
     album_button.classList.add('selected');
     playlist_button.classList.remove('selected');
+    document.getElementById("searchResults").innerHTML = "";
   }
 });
 
@@ -58,6 +59,7 @@ playlist_button.addEventListener('click', async _ => {
     //If we are not selected, select us!
     playlist_button.classList.add('selected');
     album_button.classList.remove('selected');
+    document.getElementById("searchResults").innerHTML = "";
   }
 });
 
