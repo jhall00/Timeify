@@ -18,7 +18,11 @@ test.addEventListener('click', async _ => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({action:"search", type: selected, term:input_term}) // to get search fields that user put in, pull from document.getElementById etc
-  }).then(res => res.json())
+  }).then(function (res) {
+      return res.json();
+    }, function (err) {
+      console.log(err);
+    })
     .then((function (res) {
       console.log(res);
       res.forEach(function(element) {
