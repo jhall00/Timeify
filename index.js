@@ -128,16 +128,12 @@ app.post('/load', (req, res) => {
     // res.render("generate")
     //take a search term from the user and search for playlists
     console.log("searching for playlists");
-    let dummy_text = "rock";
-    spotifyApi.searchPlaylists(dummy_text, { limit: 5 }).then(function (data) {
-      console.log(data.body.playlists);
-    }
-    ).catch(function (err) {
-      console.log(err);
+    spotifyApi.getUserPlaylists().then(function (data) {
+      console.log(data.body);
+      res.send(data.body);
     });
-  }
 
-  else{
+  } else {
 
   //receive data from when load button is clicked
   }
@@ -357,7 +353,7 @@ app.get('/callback', (req, res) => {
 
     var p1 =spotifyApi.getMe()
     .then(function(data) {
-      userID = data.body.id      
+      userID = data.body.display_name
     }, function(err) {
       console.log('Something went wrong!', err);
     });
