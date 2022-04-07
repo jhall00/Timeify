@@ -352,7 +352,19 @@ app.get('/callback', (req, res) => {
 
 
   app.get('/home', (req, res) => {
-        res.render("homePage")
+
+    var userID = ""
+
+    var p1 =spotifyApi.getMe()
+    .then(function(data) {
+      userID = data.body.id      
+    }, function(err) {
+      console.log('Something went wrong!', err);
+    });
+
+    Promise.all([p1]).then(() => {
+      res.render("homePage",{userID})
+    });
 
   })
 

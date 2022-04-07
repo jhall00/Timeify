@@ -225,6 +225,14 @@ countDown.innerHTML = convertMsToTime(timeleft - counter);
       interval = setInterval(function(){
         counter +=1000
         countDown.innerHTML= convertMsToTime(timeleft - counter);
+        if(timeleft - counter == 0){
+          clearInterval(interval)
+          interval = -1
+          alert("done") //temporary (replace with notification done alarm)
+
+          // Need to set post to pause when timer is done
+
+        }
       }, 1000)
     }
     else{
