@@ -19,9 +19,8 @@
         <div class="flex justify-center ">
 
             <div class="text-slate-50 text-center font-bold px-9 bg-dark-gray hover:bg-dark-gray
-                                            rounded-xl drop-shadow-md py-5 w-fit m-8">
-                <a class="text-slate-50 text-center font-bold px-9 bg-dark-gray hover:bg-dark-gray
-                                            rounded-xl drop-shadow-md py-5 w-fit m-8 text-xl whitespace-pre-line" href="/login"> Log in
+                                            rounded-xl drop-shadow-md py-5 w-fit m-8 cursor-pointer" id="login-button">
+                <a class="text-xl whitespace-pre-line" href="/login"> Log in
                     with Spotify
                 </a>
 
@@ -32,5 +31,11 @@
 </div>
 <!-- how to grab data from server (from index.js) to browser (ejs syntax) -->
 <p><%= exStr ;%></p>
+<script>
+    //load page on click
+    document.getElementById("login-button").addEventListener("click", function () {
+        window.location.href = "/login";
+    });
+</script>
 </body>
 </html>
