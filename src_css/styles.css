@@ -9,7 +9,7 @@ html {
 }
 
 .main {
-  @apply m-8 bg-gradient-to-r from-white_grad1 to-white_grad2 backdrop-blur-lg shadow-lg w-5/6 h-max rounded-2xl pb-16;
+  @apply m-8 bg-gradient-to-r from-white_grad1 to-white_grad2 backdrop-blur-lg shadow-lg w-5/6 h-fit rounded-2xl pb-16;
 }
 
 .navbar {
