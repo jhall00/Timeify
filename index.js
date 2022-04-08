@@ -123,14 +123,14 @@ app.post('/load', (req, res) => {
 
   // receive data from when search button is clicked
 
-  if(req.body.action == "search" ){
+  if(req.body.action === "select_source" ){
 
     // res.render("generate")
     //take a search term from the user and search for playlists
-    console.log("searching for playlists");
     spotifyApi.getUserPlaylists().then(function (data) {
-      console.log(data.body);
-      res.send(data.body);
+      // console.log(data.body);
+      console.log("sending data to client");
+      res.send(data.body.items);
     });
 
   } else {
