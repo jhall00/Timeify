@@ -25,8 +25,9 @@ test.addEventListener('click', async _ => {
     })
     .then((function (res) {
       console.log(res);
-      res.forEach(function(element) {
-          searchResultsHTML += "<div class='border-solid rounded-lg border-4 mx-2'>" +
+      for (let i = 0; i < res.length; i++){
+        const element = res[i];
+          searchResultsHTML += "<div data-spotify-id=\"" + element.id + "\" class='border-solid rounded-lg border-4 mx-2'>" +
             "<img class='cover_art' src='" + element.cover_art + "'>" +
             "<p>" + element.title + "</p>";
           if (isSelected(album_button)) {
@@ -35,9 +36,8 @@ test.addEventListener('click', async _ => {
             searchResultsHTML += "<p>" + element.owner + "</p>";
           }
           searchResultsHTML += "</div>";
-          return searchResultsHTML;
+          searchResultsHTML;
         }
-      );
 
       document.getElementById("searchResults").innerHTML = searchResultsHTML
 

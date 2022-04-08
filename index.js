@@ -76,18 +76,20 @@ app.post('/generate', (req, res) => {
     if (req.body.type == "album") {
       returned = spotifyApi.searchAlbums(req.body.term, { limit: 5 }).then(function (data) {
         data.body.albums.items.forEach(function (item) {
-          results.push({ title: item.name, artists: item.artists, cover_art : item.images[0].url });
+          console.log(item);
+          results.push({ title: item.name, artists: item.artists, cover_art : item.images[0].url, id: item.id });
         });
       });
     } else {
       returned = spotifyApi.searchPlaylists(req.body.term, { limit: 5 }).then(function (data) {
         data.body.playlists.items.forEach(function (item) {
-          results.push({ title: item.name, owner: item.owner.display_name, cover_art : item.images[0].url });
+          console.log(item);
+          results.push({ title: item.name, owner: item.owner.display_name, cover_art : item.images[0].url, id: item.id});
         });
         // res.send(results);
       });
     }
-    Promise.all([returned]).then(() => {
+    Promise.all([returned]).then((val) => {
       res.send(results)
     });
   }
