@@ -20,7 +20,7 @@ module.exports = {
 
       },
       backgroundImage: {
-        'main-background': "url('/page_background.png')",
+        'main-background': "url('/page_background.webp')",
 
       },
       width: {

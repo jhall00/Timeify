@@ -50,8 +50,8 @@ app.set("view engine", "ejs")
 app.get('/', (req, res) => {
   // res.sendFile(path.join(__dirname, 'public/login.html'));
   exStr = "passing data example from server to browser"
-  res.render("login", {exStr})
-
+  res.setHeader('Cache-Control', 'max-age=31536000');
+  res.render("login", {exStr});
 });
 
 app.get('/generate', (req, res) => {
@@ -76,18 +76,20 @@ app.post('/generate', (req, res) => {
     if (req.body.type == "album") {
       returned = spotifyApi.searchAlbums(req.body.term, { limit: 5 }).then(function (data) {
         data.body.albums.items.forEach(function (item) {
-          results.push({ title: item.name, artists: item.artists, cover_art : item.images[0].url });
+          console.log(item);
+          results.push({ title: item.name, artists: item.artists, cover_art : item.images[0].url, id: item.id });
         });
       });
     } else {
       returned = spotifyApi.searchPlaylists(req.body.term, { limit: 5 }).then(function (data) {
         data.body.playlists.items.forEach(function (item) {
-          results.push({ title: item.name, owner: item.owner.display_name, cover_art : item.images[0].url });
+          console.log(item);
+          results.push({ title: item.name, owner: item.owner.display_name, cover_art : item.images[0].url, id: item.id});
         });
         // res.send(results);
       });
     }
-    Promise.all([returned]).then(() => {
+    Promise.all([returned]).then((val) => {
       res.send(results)
     });
   }
@@ -123,21 +125,17 @@ app.post('/load', (req, res) => {
 
   // receive data from when search button is clicked
 
-  if(req.body.action == "search" ){
+  if(req.body.action === "select_source" ){
 
     // res.render("generate")
     //take a search term from the user and search for playlists
-    console.log("searching for playlists");
-    let dummy_text = "rock";
-    spotifyApi.searchPlaylists(dummy_text, { limit: 5 }).then(function (data) {
-      console.log(data.body.playlists);
-    }
-    ).catch(function (err) {
-      console.log(err);
+    spotifyApi.getUserPlaylists().then(function (data) {
+      // console.log(data.body);
+      console.log("sending data to client");
+      res.send(data.body.items);
     });
-  }
 
-  else{
+  } else {
 
   //receive data from when load button is clicked
   }
@@ -228,7 +226,7 @@ app.post('/player/:ID', (req, res) => {
     // transfer playing to our web device
     spotifyApi.transferMyPlayback([req.body.device_id])
     .then(function() {
-      console.log('Transfering playback to ' + req.body.device_id);
+      console.log('Transferring playback to ' + req.body.device_id);
       res.json({msg:"transferred"})
     }, function(err) {
       //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
@@ -326,7 +324,7 @@ app.get('/callback', (req, res) => {
         console.log('refresh_token:', refresh_token);
 
         console.log(
-          `Sucessfully retreived access token. Expires in ${expires_in} s.`
+          `Successfully retrieved access token. Expires in ${expires_in} s.`
         );
         // res.sendFile(path.join(__dirname, 'public/homePage.html'));
 
@@ -352,7 +350,19 @@ app.get('/callback', (req, res) => {
 
 
   app.get('/home', (req, res) => {
-        res.render("homePage")
+
+    var userID = ""
+
+    var p1 =spotifyApi.getMe()
+    .then(function(data) {
+      userID = data.body.display_name
+    }, function(err) {
+      console.log('Something went wrong!', err);
+    });
+
+    Promise.all([p1]).then(() => {
+      res.render("homePage",{userID})
+    });
 
   })
 

@@ -233,6 +233,7 @@ function close_halfway(){
       interval = setInterval(function(){
         counter +=1000
         countDown.innerHTML= convertMsToTime(timeleft - counter);
+<<<<<<< HEAD
 
         // for the halfway popup
         if (countDown.innerHTML == halftime)
@@ -244,6 +245,16 @@ function close_halfway(){
 
         }
         
+=======
+        if(timeleft - counter == 0){
+          clearInterval(interval)
+          interval = -1
+          alert("done") //temporary (replace with notification done alarm)
+
+          // Need to set post to pause when timer is done
+
+        }
+>>>>>>> 088e13d811a1694ded5f65f3137b4a5dc20a5240
       }, 1000)
       
     }
