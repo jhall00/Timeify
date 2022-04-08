@@ -226,7 +226,7 @@ app.post('/player/:ID', (req, res) => {
     // transfer playing to our web device
     spotifyApi.transferMyPlayback([req.body.device_id])
     .then(function() {
-      console.log('Transfering playback to ' + req.body.device_id);
+      console.log('Transferring playback to ' + req.body.device_id);
       res.json({msg:"transferred"})
     }, function(err) {
       //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
@@ -324,7 +324,7 @@ app.get('/callback', (req, res) => {
         console.log('refresh_token:', refresh_token);
 
         console.log(
-          `Sucessfully retreived access token. Expires in ${expires_in} s.`
+          `Successfully retrieved access token. Expires in ${expires_in} s.`
         );
         // res.sendFile(path.join(__dirname, 'public/homePage.html'));
 
