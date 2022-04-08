@@ -52,7 +52,7 @@ html {
 }
 
 body {
-  @apply bg-main-background bg-cover;
+  @apply bg-main-background;
 }
 
 .selected {

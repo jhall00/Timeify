@@ -50,8 +50,8 @@ app.set("view engine", "ejs")
 app.get('/', (req, res) => {
   // res.sendFile(path.join(__dirname, 'public/login.html'));
   exStr = "passing data example from server to browser"
-  res.render("login", {exStr});
   res.setHeader('Cache-Control', 'max-age=31536000');
+  res.render("login", {exStr});
 });
 
 app.get('/generate', (req, res) => {
