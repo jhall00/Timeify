@@ -19,6 +19,10 @@
   @apply bg-slate-50;
 }
 
+.halfway-popup {
+  display: none;
+  @apply 5px solid black;
+}
 .close {
   @apply text-gray-400;
   @apply float-right;

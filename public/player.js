@@ -214,18 +214,38 @@ var counter = 0
 
 var timeleft = parseInt(playlistLengthStr)
 var interval = -1
-
+var halftime = timeleft - 4000//timeleft / 2
 var countDown = document.getElementById("countDown")
-
+console.log("halftime is: ", halftime)
+halftime = convertMsToTime(halftime)
+console.log("Halftime is: ", halftime)
 countDown.innerHTML = convertMsToTime(timeleft - counter);
+function open_halfway(){
+  document.getElementById("myHalfway").style.display = "block";
+}
+function close_halfway(){
+  document.getElementById("myHalfway").style.display = "none";
+}
 
-
+  
   ppButton.addEventListener("click", function() {
     if(interval == -1){
       interval = setInterval(function(){
         counter +=1000
         countDown.innerHTML= convertMsToTime(timeleft - counter);
+
+        // for the halfway popup
+        if (countDown.innerHTML == halftime)
+        {
+          // put code for popup window and sound here
+          console.log("THEY ARE EQUAL")
+          open_halfway()
+          setTimeout(close_halfway(), 10000)
+
+        }
+        
       }, 1000)
+      
     }
     else{
       clearInterval(interval)
