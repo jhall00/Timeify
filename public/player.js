@@ -5,6 +5,13 @@ accessStr = accessStr.substring(1);
 var ppButtonIcon = document.getElementById("ppButtonPic")
 var ppButton = document.getElementById("ppButton")
 
+var counter = 0
+
+
+var accumulatedSongTime = 0
+var currentSongID = ""
+var previousSongID = ""
+
 
 // creates a new player in browser to play to
 window.onSpotifyWebPlaybackSDKReady = () => {
@@ -42,11 +49,28 @@ window.onSpotifyWebPlaybackSDKReady = () => {
 
   // listener for when song changes or anything in player changes
   player.addListener('player_state_changed', ({
-
     track_window: { current_track }
   }) => {
 
-    
+    player.getCurrentState().then(state => {
+      currentSongID = current_track.id
+      if(previousSongID ==""){
+        previousSongID = currentSongID
+      }
+      if(state.paused == false){
+
+        // if we have changed tp next song
+        if(currentSongID != previousSongID){
+          // we need to buffer the countdown by 1.8 seconds since there is a delay between songs and when 
+          // the playlist is first played
+          counter -= 1800
+          previousSongID = currentSongID
+          
+        }
+      }
+
+    })
+
     var currentSongName = current_track.name
 
     var songTitles = document.getElementsByClassName("songTitle");
@@ -93,8 +117,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
         ppButton.classList.add("playing");
 
         ppButtonIcon.src="/pauseButton.svg";
-
-
+        
         //send status of what action/ api call we want to make to index.js with post
         const response = await fetch('/player/:ID', {
             method: 'POST',
@@ -105,8 +128,6 @@ window.onSpotifyWebPlaybackSDKReady = () => {
             body: JSON.stringify({action:"start"})
           }).then(res => res.json())
             .then(res => console.log(res));
-
-
 
 
     }
@@ -209,7 +230,6 @@ window.onload = function(){
 
 
 
-var counter = 0
 // var playlistSeconds =  convertMStoS(parseInt(playlistLengthStr))
 
 var timeleft = parseInt(playlistLengthStr)
@@ -244,12 +264,24 @@ function close_halfway(){
 
         }
         
-        if(timeleft - counter == 0){
+        //if timer is 0 left
+        if(timeleft - counter <= 0){
+          const response = fetch('/player/:ID', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json, text/plain, */*',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({action:"stop"})
+          }).then(res => res.json())
+            .then(res => console.log(res));
           clearInterval(interval)
           interval = -1
-          alert("done") //temporary (replace with notification done alarm)
-
-          // Need to set post to pause when timer is done
+          console.log("done") //temporary (replace with notification done alarm) 
+          ppButton.classList.remove("playing");
+          ppButton.classList.add("stopped");
+          // For Mike: change to stop button so that user can click that to stop the alarm when it's playing
+          ppButtonIcon.src="/stopButton.svg";
 
         }
       }, 1000)

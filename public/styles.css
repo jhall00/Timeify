@@ -790,6 +790,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   fill: currentColor;
 }
 
+.object-cover{
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .p-2{
   padding: 0.5rem;
 }
@@ -961,6 +966,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   opacity: 0.5;
 }
 
+.opacity-0{
+  opacity: 0;
+}
+
 .shadow-lg{
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
@@ -1130,6 +1139,10 @@ body{
 .hover\:text-xl:hover{
   font-size: 1.25rem;
   line-height: 1.75rem;
+}
+
+.hover\:opacity-100:hover{
+  opacity: 1;
 }
 
 .focus\:border-dark-gray:focus{

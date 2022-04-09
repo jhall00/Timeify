@@ -16,7 +16,9 @@ module.exports = {
       'main-green': '#456158',
       'playlist-gray':'#858585',
       'gray-shadow': '#787878',
-      'dark-gray': '#303030'
+      'dark-gray': '#303030',
+      'black-overlay': 'rgba(0, 0, 0, 0.5)',
+
 
       },
       backgroundImage: {

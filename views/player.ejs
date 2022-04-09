@@ -52,11 +52,18 @@
             <!-- song list -->
             <div class=" w-450 my-5 mr-16">
                 <div class="flex bg-playlist-gray min-w-fit h-fit p-6 rounded-t-2xl ">
-                    <img class="w-32 h-32" id="cover" src= <%= cover_art ;%> alt="cover art">
+        
+                    <img class="w-32 h-32 object-cover" id="cover" src= <%= cover_art ;%> alt="cover art">
+                    <!-- for hover cove art change overlay -->
+                    <div class="w-32 h-32 opacity-0 hover:opacity-100 absolute">
+                        <img class="" src= "/pencil.svg" alt="edit icon">
+       \                    </div>
+  
+
 
                     <div class="flex-col w-full">
                         <p id="playerTitle" class="text-2xl text-right text-white "><%= playlistTitle ;%> </p>
-                        <p id="playingType" class="text-s text-right text-white  pb-4">Playlist/Album</p>
+                        <p id="playingType" class="text-s text-right text-white  pb-4">Album</p>
                         <p id="playerLengthLabel" class="text-s text-right text-white  pb-4"><%= playlistLength ;%></p>
                         <img id="shuffle"
                              class="fixed top-50 right-20 mr-2 hover:cursor-pointer shuffle_off w-7 float-right"
