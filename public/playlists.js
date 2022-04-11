@@ -4,14 +4,21 @@ var accessStr = access.innerHTML
 accessStr = accessStr.substring(1);
 var playlistOver = document.getElementById("playlistOver");
 var playlistUnder = document.getElementById("playlistUnder");
+var songs = document.getElementById("songs");
+var title = document.getElementById("title");
+var cover = document.getElementById("cover");
 
 // source : https://algorithms.tutorialhorizon.com/given-an-array-print-all-unique-subsets-with-a-given-sum/
 // all times are in miliseconds
 
-// pull song times into array
-var arrA = [180000,240000,360000,90000,390000,60000,330000,240000,450000];
+// Create new map (song title, song length)
+// Is this how I can grab the values from my get request?
+var playlist = new Map();
+for(var i = start; i < songs.length; i++){
+  playlist.set(songs.title[i], songs.time[i]);
+}
 
-// timer set by user (15 mins in this example)
+// Replace fixed value with value from generate form: how to do that?
 var realGoal = 900000;
 var n = realGoal+60000;
 

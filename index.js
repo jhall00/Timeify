@@ -145,20 +145,25 @@ app.post('/load', (req, res) => {
 });
 
 app.get('/playlists', (req, res) => {
-  var pID = "37i9dQZF1DZ06evO0ENBD2"
+  // var pID = "37i9dQZF1DZ06evO0ENBD2"
+  var pID = (req.params.ID)
   var songs = []
   var playlistTitle = ""
-  var playlistLength = 0
+  // var playlistLength = 0
   var type ="playlist"
   const p1 = spotifyApi.getPlaylist(pID)
   .then(function(data) {
     data.body.tracks.items.forEach(track=> {
 
-      playlistLength += track.track.duration_ms
-      songs.push({title: track.track.name, artist: track.track.artists[0].name})
+      // playlistLength += track.track.duration_ms
+      songs.push({title: track.track.name, artist: track.track.artists[0].name,
+        time: track.track.duration_ms})
 
     })
+    
     playlistTitle = data.body.name
+    cover_art = data.body.images[0].url
+
   }, function(err) {
     console.log('Something went wrong!', err);
 
@@ -168,7 +173,7 @@ app.get('/playlists', (req, res) => {
 
   // wait for all promises to be available
   Promise.all([p1]).then(() => {
-    res.render("playlists", {songs, playlistTitle, access_token, playlistLength})
+    res.render("playlists", {songs, playlistTitle, cover_art, access_token})
 
   })
 });
