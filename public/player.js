@@ -226,9 +226,7 @@ window.onload = function(){
 
   })
 
-
-
-
+var i = 0;
 
 // var playlistSeconds =  convertMStoS(parseInt(playlistLengthStr))
 
@@ -247,12 +245,29 @@ function close_halfway(){
   document.getElementById("myHalfway").style.display = "none";
 }
 
-  
+///variables for load bar
+var counterhtml = document.getElementById("counterhtml")
+var timerhtml = document.getElementById("timerhtml")
+var percentage = document.getElementById("percentage")
+
+
+var bar1 = new ldBar("#help");
+//bar1.set(percentage);
+
   ppButton.addEventListener("click", function() {
     if(interval == -1){
       interval = setInterval(function(){
         counter +=1000
         countDown.innerHTML= convertMsToTime(timeleft - counter);
+
+        ///setting values for load bar
+        counterhtml.innerHTML = counter
+        timerhtml.innerHTML = timeleft
+        percentage.innerHTML= (counter/timeleft)*100
+
+        //changing data-value dynamically
+        var dataAttribute = help.getAttribute('data-value');
+        debug.innerHTML= dataAttribute
 
         // for the halfway popup
         if (countDown.innerHTML == halftime)
@@ -263,7 +278,23 @@ function close_halfway(){
           setTimeout(close_halfway(), 10000)
 
         }
+
+        //load bar ////////////
+        if (i == 0) {
+          i = 1;
+          var id = setInterval(frame, 10);
+          function frame() {
+            if (percentage.innerHTML >= 100) {
+              clearInterval(id);
+              i = 0;
+            } else {
+              bar1.set(percentage.innerHTML);
+            }
+          }
+        }
         
+
+
         //if timer is 0 left
         if(timeleft - counter <= 0){
           const response = fetch('/player/:ID', {

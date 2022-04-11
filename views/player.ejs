@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="/loading-bar.css">
+    <script type="text/javascript" src="/loading-bar.js"></script>
+    
     <!-- for tailwind (uncomment when ready to use) -->
     <link rel="stylesheet" href="/styles.css">
     <script src="https://sdk.scdn.co/spotify-player.js"></script>
@@ -39,6 +43,12 @@
 
         <div>
             <h3 id="countDown">Timer</h3>
+            <!-- var checkers-->
+            <h2 id="counterhtml" style="display:none">count</h2>
+            <h2 id="timerhtml"style="display:none">Timeleft</h2>
+            <h2 id="percentage"style="display:none">percent</h2>
+            <h2 id="debug"style="display:none">debug</h2>
+           
         </div>
         <div class="flex justify-between">
 
@@ -49,6 +59,25 @@
                 <img id="ppButtonPic" src="/playButton.svg" alt="play button">
             </button>
 
+            <!-- progress bar// loading.io style --> 
+            <div id="help"
+            data-preset="circle"
+            class="ldBar"
+            data-value="0"
+          ></div>
+          
+          <style type="text/css">
+            .ldBar path.mainline {
+              stroke-width: 10;
+              stroke: rgb(19, 87, 40);
+            }
+            .ldBar path.baseline {
+              stroke-width: 30;
+              stroke: #f1f2f3;
+              filter:url(#custom-shadow);
+            }
+          </style>
+
             <!-- song list -->
             <div class=" w-450 my-5 mr-16">
                 <div class="flex bg-playlist-gray min-w-fit h-fit p-6 rounded-t-2xl ">
@@ -57,7 +86,7 @@
                     <!-- for hover cove art change overlay -->
                     <div class="w-32 h-32 opacity-0 hover:opacity-100 absolute">
                         <img class="" src= "/pencil.svg" alt="edit icon">
-       \                    </div>
+                           </div>
   
 
 
