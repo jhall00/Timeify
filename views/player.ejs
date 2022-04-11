@@ -11,6 +11,8 @@
     
     <!-- for tailwind (uncomment when ready to use) -->
     <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/custom_styles.css">
+
     <script src="https://sdk.scdn.co/spotify-player.js"></script>
 
     <title>Player</title>
@@ -58,8 +60,8 @@
                     class="my-5 mx-8 bg-gray-600 paused unStarted first rounded-full h-fit opacity-50 cursor-not-allowed">
                 <img id="ppButtonPic" src="/playButton.svg" alt="play button">
             </button>
-
-            <!-- progress bar// loading.io style --> 
+            
+             <!-- progress bar// loading.io style --> 
             <div id="help"
             data-preset="circle"
             class="ldBar"
@@ -77,19 +79,38 @@
               filter:url(#custom-shadow);
             }
           </style>
+          
+          <!-- toggle halfway  -->
+            <div>
+                <!-- Rounded switch -->
+                <p class="inline">Halfway Notification</p>
+
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+
 
             <!-- song list -->
             <div class=" w-450 my-5 mr-16">
                 <div class="flex bg-playlist-gray min-w-fit h-fit p-6 rounded-t-2xl ">
         
+
                     <img class="w-32 h-32 object-cover" id="cover" src= <%= cover_art ;%> alt="cover art">
                     <!-- for hover cove art change overlay -->
+                    
                     <div class="w-32 h-32 opacity-0 hover:opacity-100 absolute">
                         <img class="" src= "/pencil.svg" alt="edit icon">
                            </div>
   
 
+                    <!-- <div class="w-32 h-32 opacity-0 hover:opacity-100 absolute">
+                        <img class="absolute" src= "/pencil.svg" alt="edit icon">
+                            <input id="image_file" class="w-full h-full opacity-0 absolute" type="file" name="cover_art">
+                    </div> -->
 
+  
                     <div class="flex-col w-full">
                         <p id="playerTitle" class="text-2xl text-right text-white "><%= playlistTitle ;%> </p>
                         <p id="playingType" class="text-s text-right text-white  pb-4">Album</p>

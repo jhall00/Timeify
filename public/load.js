@@ -35,3 +35,15 @@ test.addEventListener('click', async _ => {
 function isSelected(element) {
   return element.classList.contains('selected');
 }
+
+//source hint
+var sourceQ = document.getElementById("sourceQ")
+
+var sourceInst = document.getElementById("sourceInstructions")
+sourceQ.onmouseover = function(){
+    sourceInst.style.visibility = "visible"
+
+};
+sourceQ.onmouseout = function(){
+    sourceInst.style.removeProperty("visibility")
+};
