@@ -1,22 +1,41 @@
 // get access token from ejs file
-var access = document.getElementById("access")
-var accessStr = access.innerHTML
-accessStr = accessStr.substring(1);
+// var access = document.getElementById("access")
+// var accessStr = access.innerHTML
+// accessStr = accessStr.substring(1);
 var playlistOver = document.getElementById("playlistOver");
 var playlistUnder = document.getElementById("playlistUnder");
 var songs = document.getElementById("songs");
 var title = document.getElementById("title");
 var cover = document.getElementById("cover");
 
+
+// pull form data from url
+function getUrlVars() {
+  var vars = {};
+  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+      vars[key] = value;
+  });
+  return vars;
+}
+
+// holds all the form input objects
+var inputs = getUrlVars()
+
+
+
 // source : https://algorithms.tutorialhorizon.com/given-an-array-print-all-unique-subsets-with-a-given-sum/
 // all times are in miliseconds
 
+
+
 // Create new map (song title, song length)
 // Is this how I can grab the values from my get request?
-var playlist = new Map();
-for(var i = start; i < songs.length; i++){
-  playlist.set(songs.title[i], songs.time[i]);
-}
+// var playlist = new Map();
+// for(var i = start; i < songs.length; i++){
+//   playlist.set(songs.title[i], songs.time[i]);
+// }
+
+var arrA = [180000,240000,360000,90000,390000,60000,330000,240000,450000];
 
 // Replace fixed value with value from generate form: how to do that?
 var realGoal = 900000;

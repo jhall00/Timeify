@@ -64,5 +64,5 @@ body {
 }
 
 .cover_art {
-  @apply border-solid rounded-lg border-4;
+  @apply border-solid border-green-800 rounded-lg border-4 m-6;
 }
