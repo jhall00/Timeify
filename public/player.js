@@ -231,25 +231,18 @@ var i = 0;
 // var playlistSeconds =  convertMStoS(parseInt(playlistLengthStr))
 
 var timeleft = parseInt(playlistLengthStr)
+
 var interval = -1
-var halftime = timeleft - 4000//timeleft / 2
+var halftime = timeleft / 2
+var close_popup = halftime - 5000
 var countDown = document.getElementById("countDown")
-console.log("halftime is: ", halftime)
-halftime = convertMsToTime(halftime)
-console.log("Halftime is: ", halftime)
+
 countDown.innerHTML = convertMsToTime(timeleft - counter);
-function open_halfway(){
-  document.getElementById("myHalfway").style.display = "block";
-}
-function close_halfway(){
-  document.getElementById("myHalfway").style.display = "none";
-}
 
 ///variables for load bar
 var counterhtml = document.getElementById("counterhtml")
 var timerhtml = document.getElementById("timerhtml")
 var percentage = document.getElementById("percentage")
-
 
 var bar1 = new ldBar("#help");
 //bar1.set(percentage);
@@ -268,15 +261,16 @@ var bar1 = new ldBar("#help");
         //changing data-value dynamically
         var dataAttribute = help.getAttribute('data-value');
         debug.innerHTML= dataAttribute
-
+        
         // for the halfway popup
-        if (countDown.innerHTML == halftime)
+        if (countDown.innerHTML == convertMsToTime(halftime))
         {
-          // put code for popup window and sound here
-          console.log("THEY ARE EQUAL")
-          open_halfway()
-          setTimeout(close_halfway(), 10000)
+          document.getElementById("myHalfway").style.display = "block";
+        }
 
+        if (countDown.innerHTML == convertMsToTime(close_popup))
+        {
+          document.getElementById("myHalfway").style.display = "none";
         }
 
         //load bar ////////////

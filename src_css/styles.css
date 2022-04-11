@@ -20,6 +20,10 @@ html {
 /* Add css for playlist options here. */
 }
 
+#myHalfway {
+  display: block;
+}
+
 .search-popup {
   display: none;
   @apply fixed;
