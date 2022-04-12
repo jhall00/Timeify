@@ -22,11 +22,8 @@ function getUrlVars() {
 var inputs = getUrlVars()
 
 
-
 // source : https://algorithms.tutorialhorizon.com/given-an-array-print-all-unique-subsets-with-a-given-sum/
 // all times are in miliseconds
-
-
 
 // Create new map (song title, song length)
 // Is this how I can grab the values from my get request?

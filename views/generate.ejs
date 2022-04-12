@@ -258,6 +258,7 @@
   var search = document.getElementById("mySearch");
   var btn = document.getElementById("searchBtn");
   var span = document.getElementsByClassName("close")[0];
+  var confirm = document.getElementById("confirm_button");
   btn.onclick = function() {
     search.style.display = "block";
     return false;
@@ -272,6 +273,11 @@
       search.style.display = "none";
     }
   }
+
+  confirm.onclick = function(){
+    search.style.display = "none";
+  }  
+
 </script>
 <script src="/search.js"></script>
 <script src="/generate.js"></script>
