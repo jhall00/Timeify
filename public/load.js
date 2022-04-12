@@ -28,6 +28,8 @@ test.addEventListener('click', async _ => {
 
       document.getElementById("playlist-load").innerHTML = options;
 
+
+
     });
 
 });
@@ -35,6 +37,23 @@ test.addEventListener('click', async _ => {
 function isSelected(element) {
   return element.classList.contains('selected');
 }
+
+
+var yourSelect =document.getElementById("playlist-load")
+var currentSelected = ""
+yourSelect.addEventListener('change', (event) => {
+
+  currentSelected = yourSelect.options[ yourSelect.selectedIndex ].dataset.spotifyId
+});
+
+
+document.getElementById("loadSubmit").onclick = function(){
+  window.location.href = "/player/"+currentSelected;
+
+};
+
+
+
 
 //source hint
 var sourceQ = document.getElementById("sourceQ")
