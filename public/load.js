@@ -38,15 +38,33 @@ test.addEventListener('click', async _ => {
         }
 
 
+
+
     }));
 
 });
 
 function resultClick(id, pOra){
 
-  var design=document.getElementById("confirm_button")
-  design.classList.remove("cursor-not-allowed","opacity-50")
-  //console.log("clicked "+id+ pOra)
+
+var yourSelect =document.getElementById("playlist-load")
+var currentSelected = ""
+yourSelect.addEventListener('change', (event) => {
+
+  currentSelected = yourSelect.options[ yourSelect.selectedIndex ].dataset.spotifyId
+});
+
+
+document.getElementById("loadSubmit").onclick = function(){
+  window.location.href = "/player/"+currentSelected;
+
+};
+
+
+
+
+//source hint
+var sourceQ = document.getElementById("sourceQ")
 
 
   var get_id= document.getElementById("ID")

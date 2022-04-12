@@ -187,10 +187,71 @@ app.get('/playlists', (req, res) => {
 
 app.post('/playlists', (req, res) => {
 
-  var songs = []
-  var playlistTitle = ""
+  var songList =[]
+  var newID = []
+  // var songListDict = {}
 
-  // res.render("playlists", {songs, playlistTitle})
+
+  // data.body.albums.items.forEach(function (item) {
+  //   console.log(item);
+  //   results.push({ title: item.name, artists: item.artists, cover_art : item.images[0].url, id: item.id });
+  // });
+
+
+  console.log("___________________________")
+  if(req.body.action == 'getSongs'){
+    if(req.body.pOra == "album"){
+
+      var p1 =spotifyApi.getAlbum(req.body.ID)
+      .then(function(data) {
+        songList = data.body.tracks.items
+        console.log('Album information', data.body);
+      }, function(err) {
+        console.error(err);
+      });
+    }
+
+    else{
+
+
+     var p1= spotifyApi.getPlaylist(req.body.ID)
+      .then(function(data) {
+        songList = data.body.tracks.items
+
+        // console.log('Some information about this playlist', data.body);
+      }, function(err) {
+        console.log('Something went wrong!', err);
+      });
+
+    }
+    Promise.all([p1]).then((val) => {
+      res.send(songList)
+    });
+
+  }
+
+  else if(req.body.action == 'createPlaylist'){
+
+      var p2 = spotifyApi.createPlaylist(req.body.newPlaylistName, { 'description': 'Timeify generated playlist', 'public': true })
+    .then(function(data) {
+      newID = [data.body.id]
+      // res.send(newID)
+      return data.body.id
+    })
+    .then(function(id) {
+      return spotifyApi.addTracksToPlaylist(id, req.body.songList)
+
+    })
+
+
+    Promise.all([p2]).then((val) => {
+      res.send(newID)
+    });
+
+
+  }
+
+
 
 
 })

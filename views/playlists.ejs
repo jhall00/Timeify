@@ -7,12 +7,13 @@
     <!-- for tailwind (uncomment when ready to use) -->
     <link rel="stylesheet" href="/styles.css">
 
-    <title>Select A Playlist Length</title>
+    <title>Choose A Playlist Length</title>
 </head>
 
 <body>
-<div class="main">
-    <div class="flex justify-center">
+<div class="flex justify-center">
+
+    <div class="main">
         <p id="songs" class="hidden"> <%= songs ;%></p>
         <p id="title" class="hidden"> <%= playlistTitle ;%></p>
 
@@ -21,14 +22,39 @@
                 <img src="Logo.svg" class="p-2 h-14" />
             </a>
         </div>
-    </div>
 
-    <p>Currently uses a hardcoded array of dummy song lengths, displays the options for a fifteen minute playlist over
-        (left) and under (right).</p>
-    <a id="playlistOver" class="hover:text-xl pr-6 font-montserrat font-bold text-main-green text-lg" href="/player">15:30</a>
 
-    <a id="playlistUnder" class="hover:text-xl pr-6 font-montserrat font-bold text-main-green text-lg" href="/player">15:00</a>
+    <div class="flex">
+        <!-- lower option -->
+        <div class="flex flex-col items-center w-1/2  ">
+            <div id="optionLowerList"class="bg-playlist-gray h-96 justify-end py-2 px-6 rounded-2xl overflow-auto m-4">
 
+
+
+            </div>
+            <button id="option1Btn" class=' bg-dark-gray text-white rounded-xl p-3'>Use Option 1</button>
+
+        </div>
+
+        <!-- higher option -->
+
+        <div class="flex flex-col items-center w-1/2  ">
+            <div id="optionHigherList"class="bg-playlist-gray h-96 justify-end py-2 px-6 rounded-2xl overflow-auto m-4">
+
+
+
+            </div>
+            <button id="option2Btn" class=' bg-dark-gray text-white rounded-xl p-3'>Use Option 2</button>
+
+        </div>
+
+</div>
+    <!-- <p>Currently uses a hardcoded array of dummy song lengths, displays the options for a fifteen minute playlist over
+        (left) and under (right).</p> -->
+    <!-- <a id="playlistOver" class="hover:text-xl pr-6 font-montserrat font-bold text-main-green text-lg" href="/player">15:30</a>
+
+    <a id="playlistUnder" class="hover:text-xl pr-6 font-montserrat font-bold text-main-green text-lg" href="/player">15:00</a> -->
+</div>
 </div>
 
 <script src="/playlists.js"></script>
