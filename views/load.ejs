@@ -70,28 +70,37 @@
     <div class="search-popup" id="mySearch">
         <div class="search-content rounded-xl">
             <span class="close">&times;</span>
-            <div class="flex" id="searchResults">
-                <label class="text-4xl">
-                    Load your Playlist:
-                    <select id="playlist-load">
-
-                    </select>
-                </label>
+            <h1 class="text-4xl">Spotify Music Search</h1>
+            <div class="flex mb-6 items-center">
+                <input
+                        class=" bg-gray-200 appearance-none border-2 border-gray-200 rounded w-fit py-2 pl-3 pr-8 mt-4 mr-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
+                        id="search_term" type="text" name="searchTerm" aria-label="Search" placeholder="Search"><br>
+                <input
+                        class=" bg-mint hover:bg-shadow_mint text-black font-bold py-3 px-4 mt-4 rounded-xl drop-shadow-md"
+                        id="searchSubmit" type="submit" value="Search" name="search" /><br><br>
             </div>
+            <hr>
+            <br>
+            <div class="flex" id="searchResults">
 
+
+            </div>
             <div>
                 <% if (results.length > 0) { %>
                     <% results.forEach(result => { %>
                         <p>
                             <%= result.title; %>
                         </p>
-                        <% results.artists.forEach(artist => { %>
-                            <%= result.name; %>
-                        <% }); %>
+
                     <% }); %>
                 <% } %>
             </div>
+            <div class="items-center">
+            <button class="bg-main-green opacity-50 cursor-not-allowed text-white py-3 px-4 rounded-xl drop-shadow-md cursor-pointer" type="button"
+            value="Confirm"name="confirm" id="confirm_button" > Confirm </button>
+            </div>
         </div>
+
     </div>
 
 

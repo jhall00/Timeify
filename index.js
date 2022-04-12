@@ -124,24 +124,30 @@ app.post('/load', (req, res) => {
 
 
   // receive data from when search button is clicked
-
-  if(req.body.action === "select_source" ){
-
+  if(req.body.action == "search" ){
+    console.log(req.body.type);
+    console.log(req.body.term);
     // res.render("generate")
     //take a search term from the user and search for playlists
-    spotifyApi.getUserPlaylists().then(function (data) {
-      // console.log(data.body);
-      console.log("sending data to client");
-      res.send(data.body.items);
+    let results = [];
+    let returned = spotifyApi.getUserPlaylists().then(function (data) {
+        data.body.items.forEach(function (item) {
+          if (item.name.toLowerCase().includes(req.body.term.toLowerCase())) {
+            console.log(item);
+            let image_url;
+            if (item.images.length > 0) {
+              image_url = item.images[0].url;
+            }
+            results.push({ title: item.name, cover_art : image_url, id: item.id });
+          } else {
+            console.log("excluding " + item.name + " from search results");
+          }
+        });
+      });
+    Promise.all([returned]).then((val) => {
+      res.send(results)
     });
-
-  } else {
-
-  //receive data from when load button is clicked
   }
-
-
-
 });
 
 app.get('/playlists', (req, res) => {
@@ -160,7 +166,7 @@ app.get('/playlists', (req, res) => {
   //       time: track.track.duration_ms})
 
   //   })
-    
+
   //   playlistTitle = data.body.name
   //   cover_art = data.body.images[0].url
 
@@ -303,7 +309,7 @@ app.post('/player/:ID', (req, res) => {
       //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
       console.log('Something went wrong!', err);
     });
-  
+
   }
 
 

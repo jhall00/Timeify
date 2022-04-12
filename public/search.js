@@ -29,7 +29,7 @@ test.addEventListener('click', async _ => {
 
       for (let i = 0; i < res.length; i++){
         const element = res[i];
-        
+
           // searchResultsHTML += "<div data-spotify-id=\"" + element.id + "\" class='border-solid rounded-lg border-4 mx-2'>" +
           //   "<img class='cover_art' src='" + element.cover_art + "'>" +
           //   "<p>" + element.title + "</p>";
@@ -43,17 +43,15 @@ test.addEventListener('click', async _ => {
             document.getElementById("searchResults").innerHTML = searchResultsHTML
             // var album_selected = document.getElementById("temp")
             // console.log(album_selected)
-            
+
           } else {
-
-
             searchResultsHTML += "<div onclick = 'resultClick(\""+ String(element.id)+"\",\"playlist\")' data-spotify-id=\"" + element.id + "\" class=' playlist_select  mx-2'>" +
             "<img class='cover_art' src='" + element.cover_art + "'>" +
             "<p>" + element.title + "</p>";
             searchResultsHTML += "<p>" + element.owner + "</p>";
-            
+
           }
-          
+
           searchResultsHTML += "</div>";
           searchResultsHTML;
           document.getElementById("searchResults").innerHTML = searchResultsHTML
@@ -100,7 +98,7 @@ function resultClick(id, pOra){
   design.classList.remove("cursor-not-allowed","opacity-50")
   //console.log("clicked "+id+ pOra)
 
-  
+
   var get_id= document.getElementById("ID")
   var get_pOra= document.getElementById("pOra")
 
@@ -113,7 +111,7 @@ function resultClick(id, pOra){
   //get input id ="hidden" set value = id
   // input id = pOra set value = pOra
 
-  
+
   // add highlight
   // get rid of class disabled
 }
