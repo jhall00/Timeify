@@ -84,7 +84,11 @@ app.post('/generate', (req, res) => {
       returned = spotifyApi.searchPlaylists(req.body.term, { limit: 5 }).then(function (data) {
         data.body.playlists.items.forEach(function (item) {
           console.log(item);
-          results.push({ title: item.name, owner: item.owner.display_name, cover_art : item.images[0].url, id: item.id});
+          let img = null;
+          if (item.images.length > 0) {
+            img = item.images[0].url;
+          }
+          results.push({ title: item.name, owner: item.owner.display_name, cover_art : img, id: item.id});
         });
         // res.send(results);
       });

@@ -186,7 +186,7 @@
                         <hr>
                     </div>
 
-  
+
 
                 </form>
 
@@ -203,7 +203,7 @@
         <div class="flex mb-6 items-center">
             <input
                     class=" bg-gray-200 appearance-none border-2 border-gray-200 rounded w-fit py-2 pl-3 pr-8 mt-4 mr-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
-                    id="search_term" type="text" name="searchTerm" aria-label="Search" placeholder="Search"><br>
+                    id="search_term" type="search" name="searchTerm" aria-label="Search" placeholder="Search"><br>
             <input
                     class=" bg-mint hover:bg-shadow_mint text-black font-bold py-3 px-4 mt-4 rounded-xl drop-shadow-md"
                     id="searchSubmit" type="submit" value="Search" name="search" /><br><br>
@@ -257,15 +257,25 @@
 <script>
   var search = document.getElementById("mySearch");
   var btn = document.getElementById("searchBtn");
-  var span = document.getElementsByClassName("close")[0];
+  var closeBtn = document.getElementsByClassName("close")[0];
   var confirm = document.getElementById("confirm_button");
   btn.onclick = function() {
     search.style.display = "block";
     return false;
   };
 
-  span.onclick = function() {
+  closeBtn.onclick = function() {
     search.style.display = "none";
+    //clear old search results when clicking the close button.
+    if (document.getElementById("searchResults").innerHTML !== "") {
+      document.getElementById("searchResults").innerHTML = "";
+    }
+    var elementById = document.getElementById("search_term");
+    if (elementById instanceof HTMLInputElement) {
+      if (elementById.value !== "") {
+        elementById.value = "";
+      }
+    }
   };
 
   window.onclick = function(event) {
@@ -276,7 +286,7 @@
 
   confirm.onclick = function(){
     search.style.display = "none";
-  }  
+  }
 
 </script>
 <script src="/search.js"></script>

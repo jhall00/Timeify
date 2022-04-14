@@ -36,19 +36,43 @@ test.addEventListener('click', async _ => {
 
 
           if (isSelected(album_button)) {
-            searchResultsHTML += "<div onclick = 'resultClick(\""+ String(element.id) +"\",\"album\")' data-spotify-id=\"" + element.id + "\" class=' album_select mx-16'>" +
-            "<img id='temp' class='cover_art' src='" + element.cover_art + "'>" +
-            "<p>" + element.title + "</p>";
-            searchResultsHTML += "<p>" + element.artists[0].name + "</p>";
+            searchResultsHTML += `<div onclick = 'resultClick("${String(element.id)}","album")' data-spotify-id="${element.id}" class='album_select'>`;
+            if(element.cover_art != null) {
+              searchResultsHTML += `<div class="art_box"><img id='temp' class='cover_art' src='${element.cover_art}'>`;
+            } else {
+              //TODO add placeholder image for missing album art.
+            }
+            searchResultsHTML += `<p class="aTitle">${element.title}</p>`;
+            if (element.artists.length > 1) {
+              //iterate through artists
+              searchResultsHTML += `<p class="aArtist">`;
+              for (let j = 0; j < element.artists.length; j++) {
+                searchResultsHTML += `${element.artists[j].name}`;
+                if (j !== element.artists.length - 1) {
+                  searchResultsHTML += `, `;
+                }
+              }
+              searchResultsHTML += `</p>`;
+            } else {
+              searchResultsHTML += `<p class="aArtist">${element.artists[0].name}</p>`;
+            }
+            searchResultsHTML += `</div>`;
             document.getElementById("searchResults").innerHTML = searchResultsHTML
             // var album_selected = document.getElementById("temp")
             // console.log(album_selected)
 
           } else {
-            searchResultsHTML += "<div onclick = 'resultClick(\""+ String(element.id)+"\",\"playlist\")' data-spotify-id=\"" + element.id + "\" class=' playlist_select  mx-2'>" +
-            "<img class='cover_art' src='" + element.cover_art + "'>" +
-            "<p>" + element.title + "</p>";
-            searchResultsHTML += "<p>" + element.owner + "</p>";
+            searchResultsHTML += `<div onclick = 'resultClick("${String(element.id)}","playlist")' data-spotify-id="${element.id}" class='playlist_select'>`;
+            searchResultsHTML += "<div class='art_box'>";
+            if(element.cover_art != null) {
+              searchResultsHTML += `<img id='temp' class='cover_art' src='${element.cover_art}'>`;
+            } else {
+              //TODO add placeholder image for missing album art.
+              searchResultsHTML += `<img id='temp' class='cover_art' src='${element.cover_art}'>`;
+            }
+            searchResultsHTML += `<p class="pTitle" >${element.title}</p>`;
+            searchResultsHTML += `<p class="pOwner">${element.owner}</p>`;
+            searchResultsHTML += "</div>";
 
           }
 
@@ -94,13 +118,11 @@ function isSelected(element) {
 
 function resultClick(id, pOra){
 
-  var design=document.getElementById("confirm_button")
+  let design = document.getElementById("confirm_button");
   design.classList.remove("cursor-not-allowed","opacity-50")
-  //console.log("clicked "+id+ pOra)
 
-
-  var get_id= document.getElementById("ID")
-  var get_pOra= document.getElementById("pOra")
+  let get_id = document.getElementById("ID");
+  let get_pOra = document.getElementById("pOra");
 
   get_id.value= id;
   get_pOra.value=pOra;

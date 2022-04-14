@@ -63,6 +63,34 @@ body {
   @apply border-4 border-solid border-gray-900;
 }
 
+.art_box {
+  @apply min-w-[200px] w-1/4;
+}
 .cover_art {
-  @apply border-solid border-green-800 rounded-lg border-4 w-1/4;
+  @apply w-fit h-fit aspect-square object-cover object-center border-solid border-green-800 rounded-lg border-4;
+}
+
+#searchResults {
+  @apply overflow-scroll;
+}
+.ldBar {
+  @apply relative;
+}
+
+.pTitle{
+  @apply truncate;
+}
+.pOwner{
+  @apply truncate;
+}
+.aTitle {
+  @apply truncate;
+}
+.aArtist {
+  @apply truncate;
+}
+
+.album_select, .playlist_select {
+  @apply cursor-pointer;
+  @apply mx-auto
 }
