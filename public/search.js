@@ -36,7 +36,7 @@ test.addEventListener('click', async _ => {
 
 
           if (isSelected(album_button)) {
-            searchResultsHTML += `<div onclick = 'resultClick("${String(element.id)}","album","${element.title}")' data-spotify-id="${element.id}" class='album_select'>`;
+            searchResultsHTML += "<div onclick = 'resultClick(this)' data-title='"+ element.title.replace(/'/,"&#39") + "' data-pOra=\"album\" data-spotify-id='" + element.id+"' class='album_select'>";
             if(element.cover_art != null) {
               searchResultsHTML += `<div class="art_box"><img id='temp' class='cover_art' src='${element.cover_art}'>`;
             } else {
@@ -62,7 +62,7 @@ test.addEventListener('click', async _ => {
             // console.log(album_selected)
 
           } else {
-            searchResultsHTML += `<div onclick = 'resultClick("${String(element.id)}","playlist","${element.title}")' data-spotify-id="${element.id}" class='playlist_select'>`;
+            searchResultsHTML += "<div onclick = 'resultClick(this)' data-title='"+ element.title.replace(/'/,"&#39") + "' data-pOra=\"playlist\" data-spotify-id='" + element.id+"' class='playlist_select'>";
             searchResultsHTML += "<div class='art_box'>";
             if(element.cover_art != null) {
               searchResultsHTML += `<img id='temp' class='cover_art' src='${element.cover_art}'>`;
@@ -116,23 +116,31 @@ function isSelected(element) {
   return element.classList.contains('selected');
 }
 
-function resultClick(id, pOra, sel){
+function resultClick(element){
 
+  //confirm button css
   let design = document.getElementById("confirm_button");
   design.classList.remove("cursor-not-allowed","opacity-50")
 
+  //clear previous highlight formatting
+  let check= document.getElementsByClassName("overall")
+  for (i=0; i<check.length; i++){
+    check[i].classList.remove("highlight")
+  }
+
+  // add highlight formatting
+  let high = document.getElementById(id);
+  high.classList.add("highlight")
+
+  ///shows selected title
   let selected= document.getElementById("selected");
-  selected.innerHTML = sel;
+  selected.innerHTML = element.dataset.title;
 
-  let get_id = document.getElementById("ID");
-  let get_pOra = document.getElementById("pOra");
-
-  get_id.value= id;
-  get_pOra.value=pOra;
-
-
-  console.log(get_id.value)
-  console.log(get_pOra.value)
+  document.getElementById("ID").value = element.dataset.spotifyId;
+  document.getElementById("pOra").value = element.dataset.pora;
+  element.focus();
+  console.log(get_id)
+  console.log(get_pOra)
   console.log(selected.value)
   //get input id ="hidden" set value = id
   // input id = pOra set value = pOra
