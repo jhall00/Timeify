@@ -70,6 +70,7 @@ body {
 .art_box {
   @apply min-w-[200px] w-1;
 }
+
 .cover_art {
   @apply w-fit h-fit aspect-square object-cover object-center border-solid border-mint rounded-lg border-4;
 }
@@ -77,24 +78,16 @@ body {
 #searchResults {
   @apply overflow-scroll flex;
 }
+
 .ldBar {
   @apply relative;
 }
 
-.pTitle{
-  @apply truncate;
-}
-.pOwner{
-  @apply truncate;
-}
-.aTitle {
-  @apply truncate;
-}
-.aArtist {
+.pTitle, .pOwner , .aTitle, .aArtist{
   @apply truncate;
 }
 
 .album_select, .playlist_select {
   @apply cursor-pointer;
-  @apply mx-auto
+  @apply mx-auto;
 }
