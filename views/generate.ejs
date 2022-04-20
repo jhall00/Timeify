@@ -43,7 +43,7 @@
                             <div id="lengthInstructions" class="invisible bg-gray-200 absolute mb-16 rounded-lg">
                                 <p class=" p-1 text-xs">Choose how long you want <br> your timed playlist to be.</p>
                             </div>
-                            <img id ="lengthQ" class="p-2" src="/questionMark.svg" alt="question mark">
+                            <img id ="lengthQ"class="p-2"src="/questionMark.svg" alt="question mark">
                             <label
                                     class="block text-white font-bold md:text-right mb-1 md:mb-0 pr-1"
                                     for="length_minutes">
@@ -136,21 +136,24 @@
                             <div id="sourceInstructions" class="invisible bg-gray-200 absolute mb-20 rounded-lg">
                                 <p class=" p-1 text-xs">Tell us what playlist/album <br> you want to use to fill your <br>timer playlist with.</p>
                             </div>
-                            <img id="sourceQ" class="p-2" src="/questionMark.svg" alt="question mark">
-                            <label class="block text-white font-bold md:text-right mb-1 md:mb-0 pr-1" for="my_source">
+                            <img id="sourceQ" class="p-2"src="/questionMark.svg" alt="question mark">
+
+                            <label
+                                    class=" block text-white font-bold md:text-right mb-1 md:mb-0 pr-1"
+                                    for="my_source">
                                 Source
                             </label>
                         </div>
                         <div class="flex w-2/3">
-                            <div class="relative md:w-1/2">
+                            <div class="relative md:w-1/3">
                                 <button
                                         class=" bg-white hover:bg-gray-200 text-black src-button py-3 px-4 rounded-xl drop-shadow-md"
                                         id="searchBtn">Select Source
                                 </button>
-
+                                
                             </div>
-                            <div class="relative md:w-1/2">
-                                <div id="selected" class="text-black text-sm py-3 px-4 rounded-xl drop-shadow-md"></div>
+                            <div class="relative md:w-2/3">
+                                <div id="selected" class="bg-black text-black text-sm py-3 px-4 rounded-xl drop-shadow-md"></div>
                             </div>
                         </div>
 
@@ -162,7 +165,7 @@
                             <div id="nameInstructions" class="invisible bg-gray-200 absolute mb-16 rounded-lg">
                                 <p class=" p-1 text-xs">What would you like to name <br>your new generated playlist?</p>
                             </div>
-                            <img id="nameQ" class="p-2" src="/questionMark.svg" alt="question mark">
+                            <img id="nameQ"class="p-2"src="/questionMark.svg" alt="question mark">
 
                             <label
                                     class=" block text-white font-bold md:text-right mb-1 md:mb-0"
@@ -222,8 +225,8 @@
         <div class="flex" id="searchResults">
 
 
-
-        <div class="mb-4">
+        </div>
+        <div>
             <% if (results.length > 0) { %>
                 <% results.forEach(result => { %>
                     <p>
@@ -233,10 +236,9 @@
                 <% }); %>
             <% } %>
         </div>
-    </div>
         <div class="items-center">
-        <button class="bg-main-green opacity-50 cursor-not-allowed text-white py-3 px-4 rounded-xl drop-shadow-md cursor-pointer" type="button"
-        value="Confirm" name="confirm" id="confirm_button">Confirm</button>
+        <button class="bg-main-green opacity-50 cursor-not-allowed  text-white py-3 px-4 rounded-xl drop-shadow-md cursor-pointer" type="button"
+        value="Confirm"name="confirm" id="confirm_button" > Confirm </button>
         </div>
     </div>
 
@@ -281,7 +283,7 @@
   };
 
   window.onclick = function(event) {
-    if (event.target === search) {
+    if (event.target == search) {
       search.style.display = "none";
     }
   }
@@ -292,6 +294,7 @@
 
 </script>
 <script src="/search.js"></script>
+<script src="/generate.js"></script>
 
 
 </body>

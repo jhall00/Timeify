@@ -59,35 +59,38 @@ body {
   @apply bg-main-background;
 }
 
-.highlight {
-  @apply border-4 border-solid border-mint bg-mint rounded-lg ;
-}
-
 .selected {
-  @apply border-4 border-solid border-main-green rounded-lg ;
+  @apply border-4 border-solid border-gray-900;
 }
 
 .art_box {
-  @apply min-w-[200px] w-1;
+  @apply min-w-[200px] w-1/4;
 }
-
 .cover_art {
-  @apply w-fit h-fit aspect-square object-cover object-center border-solid border-mint rounded-lg border-4;
+  @apply w-fit h-fit aspect-square object-cover object-center border-solid border-green-800 rounded-lg border-4;
 }
 
 #searchResults {
-  @apply overflow-scroll flex;
+  @apply overflow-scroll;
 }
-
 .ldBar {
   @apply relative;
 }
 
-.pTitle, .pOwner , .aTitle, .aArtist{
+.pTitle{
+  @apply truncate;
+}
+.pOwner{
+  @apply truncate;
+}
+.aTitle {
+  @apply truncate;
+}
+.aArtist {
   @apply truncate;
 }
 
 .album_select, .playlist_select {
   @apply cursor-pointer;
-  @apply mx-auto;
+  @apply mx-auto
 }
