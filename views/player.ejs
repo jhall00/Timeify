@@ -52,56 +52,34 @@
             <h2 id="debug"style="display:none">debug</h2>
            
         </div>
-
         <div class="flex justify-between">
 
-            <div class = " play flex center">
+
             <!-- pause/play button -->
             <button id="ppButton"
-                    class=" layer1 my-5 mx-8 bg-gray-600 paused unStarted first rounded-full h-fit opacity-50 cursor-not-allowed">
+                    class="my-5 mx-8 bg-gray-600 paused unStarted first rounded-full h-fit opacity-50 cursor-not-allowed">
                 <img id="ppButtonPic" src="/playButton.svg" alt="play button">
             </button>
             
              <!-- progress bar// loading.io style --> 
             <div id="help"
             data-preset="circle"
-            class="ldBar layer2 label-center"
+            class="ldBar label-center"
             data-value="0"
-            style="width:300px; height:400px"
           ></div>
           
           <style type="text/css">
             .ldBar path.mainline {
-              stroke: #456158;
-              stroke-width:10px;
+              stroke-width: 10;
+              stroke: rgb(19, 87, 40);
             }
-            .ldBar path.baseline{
-                stroke:rgba(255, 255, 255, 0.5);
-                stroke-width:25px;
+            .ldBar path.baseline {
+              stroke-width: 30;
+              stroke: #f1f2f3;
+              filter:url(#custom-shadow);
             }
-            .play {
-                margin-top: 50px;
-                margin-left: 50px;
-                margin-right: 50px;
-                width: 500px; 
-                height:500px
-            }
-
-            .layer1 {
-                position:absolute;
-                margin-top: 145px;
-                margin-left:95px;
-                z-index: 2;
-            }
-
-            .layer2 {
-                position:absolute;
-                z-index: 1;
-            }
-            
           </style>
           
-          </div>
           <!-- toggle halfway  -->
             <div>
                 <!-- Rounded switch -->

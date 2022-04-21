@@ -36,7 +36,7 @@ test.addEventListener('click', async _ => {
 
 
           if (isSelected(album_button)) {
-            searchResultsHTML += `<div onclick = 'resultClick("${String(element.id)}","album","${element.title}")' data-spotify-id="${element.id}" class='album_select'>`;
+            searchResultsHTML += `<div onclick = 'resultClick("${String(element.id)}","album")' data-spotify-id="${element.id}" data-title="${element.title}" class='album_select overall' id=${element.id}>`;
             if(element.cover_art != null) {
               searchResultsHTML += `<div class="art_box"><img id='temp' class='cover_art' src='${element.cover_art}'>`;
             } else {
@@ -62,7 +62,7 @@ test.addEventListener('click', async _ => {
             // console.log(album_selected)
 
           } else {
-            searchResultsHTML += `<div onclick = 'resultClick("${String(element.id)}","playlist","${element.title}")' data-spotify-id="${element.id}" class='playlist_select'>`;
+            searchResultsHTML += `<div onclick = 'resultClick("${String(element.id)}","playlist")' data-spotify-id="${element.id}" data-title="${element.title}" class='playlist_select overall' id=${element.id}>`;
             searchResultsHTML += "<div class='art_box'>";
             if(element.cover_art != null) {
               searchResultsHTML += `<img id='temp' class='cover_art' src='${element.cover_art}'>`;
@@ -116,14 +116,27 @@ function isSelected(element) {
   return element.classList.contains('selected');
 }
 
-function resultClick(id, pOra, sel){
+function resultClick(id, pOra){
 
+  //confirm button css
   let design = document.getElementById("confirm_button");
   design.classList.remove("cursor-not-allowed","opacity-50")
 
-  let selected= document.getElementById("selected");
-  selected.innerHTML = sel;
+  //clear previous highlight formatting
+  let check= document.getElementsByClassName("overall")
+  for (i=0; i<check.length; i++){
+    check[i].classList.remove("highlight")
+  }
 
+  // add highlight formatting
+  let high = document.getElementById(id);
+  high.classList.add("highlight")
+
+  ///shows selected title
+  let selected= document.getElementById("selected");
+  selected.innerHTML = high.dataset.title;
+
+  // id pora vals
   let get_id = document.getElementById("ID");
   let get_pOra = document.getElementById("pOra");
 
@@ -133,7 +146,10 @@ function resultClick(id, pOra, sel){
 
   console.log(get_id.value)
   console.log(get_pOra.value)
-  console.log(selected.value)
+  console.log(high.dataset.title)
+  //console.log(high)
+
+
   //get input id ="hidden" set value = id
   // input id = pOra set value = pOra
 
