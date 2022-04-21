@@ -29,7 +29,7 @@ html {
   @apply fixed;
   z-index: 1; /* Sit on top */
   @apply left-0 top-0;
-  @apply w-full h-full bg-opacity-40 bg-black pt-24 fixed;
+  @apply w-full h-full bg-opacity-40 bg-black pt-16 fixed;
   @apply overflow-auto; /* Enable scroll if needed */
 }
 
@@ -56,7 +56,7 @@ html {
 }
 
 body {
-  @apply bg-main-background;
+  @apply bg-main-background bg-cover bg-no-repeat h-screen;
 }
 
 .highlight {
