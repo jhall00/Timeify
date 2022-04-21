@@ -29,6 +29,9 @@ var sec = parseInt(inputs.length_seconds)
 // }
 var realGoal = convertHMSToMS(hr,min,sec)
 
+var timeHTML = convertMsToTime(realGoal)
+document.getElementById("header").innerHTML += timeHTML +"?"
+
 // make dictionary of {songLength, ID} to use for lookup
 // make array of songLengths
 var songDict = new Map();
@@ -110,9 +113,12 @@ function findFinal(){
 //loop through possibilitiesLower.get(finalLower) array 
 
 var lowerTotalTime= convertMsToTime(finalLower)
-var titleHTML = "        <div class='text-lg font-bold'>"+
-"Playlist Option 1 Length: "+ lowerTotalTime+
-"</div>"
+var titleHTML = "        <p class='inline text-lg'>"+
+"Playlist Option 1 Length: "+ 
+"</p>"+
+"<p class=' inline text-lg font-bold'>"+
+lowerTotalTime+
+"</p>"
 
 var songHTML =""
 var shorterIDArr = []
@@ -138,9 +144,11 @@ possibilitiesLower.get(finalLower).forEach(element =>  {
   var higherTotalTime = convertMsToTime(finalHigher)
 
 
-titleHTML = "        <div class='text-lg font-bold'>"+
-"Playlist Option 2 Length: "+ higherTotalTime+
-"</div>"
+titleHTML = "        <p class='inline text-lg'>"+
+"Playlist Option 2 Length: "+
+"</p>"+"<p class=' inline text-lg font-bold'>"+
+higherTotalTime+
+"</p>"
 
 songHTML =""
 var longerIDArr = []
@@ -245,9 +253,13 @@ function convertMsToTime(milliseconds) {
   minutes = minutes % 60;
   hours = hours % 24;
 
-  return `${padTo2Digits(hours)}:${padTo2Digits(minutes)}:${padTo2Digits(
-    seconds,
-  )}`;
+  if(hours == 0){
+      return `${padTo2Digits(minutes)}:${padTo2Digits(seconds,)}`;
+
+  }
+  else{
+    return `${padTo2Digits(hours)}:${padTo2Digits(minutes)}:${padTo2Digits(seconds,)}`;
+  }
 }
 
 function padTo2Digits(num) {
