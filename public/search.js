@@ -20,67 +20,67 @@ test.addEventListener('click', async _ => {
     },
     body: JSON.stringify({action:"search", type: selected, term:input_term}) // to get search fields that user put in, pull from document.getElementById etc
   }).then(function (res) {
-      return res.json();
-    }, function (err) {
-      console.log(err);
-    })
+    return res.json();
+  }, function (err) {
+    console.log(err);
+  })
     .then((function (res) {
       console.log(res);
 
       for (let i = 0; i < res.length; i++){
         const element = res[i];
 
-          // searchResultsHTML += "<div data-spotify-id=\"" + element.id + "\" class='border-solid rounded-lg border-4 mx-2'>" +
-          //   "<img class='cover_art' src='" + element.cover_art + "'>" +
-          //   "<p>" + element.title + "</p>";
+        // searchResultsHTML += "<div data-spotify-id=\"" + element.id + "\" class='border-solid rounded-lg border-4 mx-2'>" +
+        //   "<img class='cover_art' src='" + element.cover_art + "'>" +
+        //   "<p>" + element.title + "</p>";
 
 
-          if (isSelected(album_button)) {
-            searchResultsHTML += `<div onclick = 'resultClick("${String(element.id)}","album")' data-spotify-id="${element.id}" data-title="${element.title}" class='album_select overall' id=${element.id}>`;
-            if(element.cover_art != null) {
-              searchResultsHTML += `<div class="art_box"><img id='temp' class='cover_art' src='${element.cover_art}'>`;
-            } else {
-              //TODO add placeholder image for missing album art.
-            }
-            searchResultsHTML += `<p class="aTitle">${element.title}</p>`;
-            if (element.artists.length > 1) {
-              //iterate through artists
-              searchResultsHTML += `<p class="aArtist">`;
-              for (let j = 0; j < element.artists.length; j++) {
-                searchResultsHTML += `${element.artists[j].name}`;
-                if (j !== element.artists.length - 1) {
-                  searchResultsHTML += `, `;
-                }
-              }
-              searchResultsHTML += `</p>`;
-            } else {
-              searchResultsHTML += `<p class="aArtist">${element.artists[0].name}</p>`;
-            }
-            searchResultsHTML += `</div>`;
-            document.getElementById("searchResults").innerHTML = searchResultsHTML
-            // var album_selected = document.getElementById("temp")
-            // console.log(album_selected)
-
+        if (isSelected(album_button)) {
+          searchResultsHTML += "<div onclick = 'resultClick(this)' data-title='"+ element.title.replace(/'/,"&#39") + "'data-pOra=\"album\" data-spotify-id='" + element.id + "' class='album_select overall'>";
+          if(element.cover_art != null) {
+            searchResultsHTML += `<div class="art_box"><img id='temp' class='cover_art' src='${element.cover_art}'>`;
           } else {
-            searchResultsHTML += `<div onclick = 'resultClick("${String(element.id)}","playlist")' data-spotify-id="${element.id}" data-title="${element.title}" class='playlist_select overall' id=${element.id}>`;
-            searchResultsHTML += "<div class='art_box'>";
-            if(element.cover_art != null) {
-              searchResultsHTML += `<img id='temp' class='cover_art' src='${element.cover_art}'>`;
-            } else {
-              //TODO add placeholder image for missing album art.
-              searchResultsHTML += `<img id='temp' class='cover_art' src='${element.cover_art}'>`;
-            }
-            searchResultsHTML += `<p class="pTitle" >${element.title}</p>`;
-            searchResultsHTML += `<p class="pOwner">${element.owner}</p>`;
-            searchResultsHTML += "</div>";
-
+            //TODO add placeholder image for missing album art.
           }
-
-          searchResultsHTML += "</div>";
-          searchResultsHTML;
+          searchResultsHTML += `<p class="aTitle">${element.title}</p>`;
+          if (element.artists.length > 1) {
+            //iterate through artists
+            searchResultsHTML += `<p class="aArtist">`;
+            for (let j = 0; j < element.artists.length; j++) {
+              searchResultsHTML += `${element.artists[j].name}`;
+              if (j !== element.artists.length - 1) {
+                searchResultsHTML += `, `;
+              }
+            }
+            searchResultsHTML += `</p>`;
+          } else {
+            searchResultsHTML += `<p class="aArtist">${element.artists[0].name}</p>`;
+          }
+          searchResultsHTML += `</div>`;
           document.getElementById("searchResults").innerHTML = searchResultsHTML
+          // var album_selected = document.getElementById("temp")
+          // console.log(album_selected)
+
+        } else {
+          searchResultsHTML += "<div onclick = 'resultClick(this)' data-title='"+ element.title.replace(/'/,"&#39") + "'data-pOra=\"playlist\" data-spotify-id='" + element.id + "' class='album_select overall'>";
+          searchResultsHTML += "<div class='art_box'>";
+          if(element.cover_art != null) {
+            searchResultsHTML += `<img id='temp' class='cover_art' src='${element.cover_art}'>`;
+          } else {
+            //TODO add placeholder image for missing album art.
+            searchResultsHTML += `<img id='temp' class='cover_art' src='${element.cover_art}'>`;
+          }
+          searchResultsHTML += `<p class="pTitle" >${element.title}</p>`;
+          searchResultsHTML += `<p class="pOwner">${element.owner}</p>`;
+          searchResultsHTML += "</div>";
 
         }
+
+        searchResultsHTML += "</div>";
+        searchResultsHTML;
+        document.getElementById("searchResults").innerHTML = searchResultsHTML
+
+      }
 
 
     }));
@@ -116,7 +116,7 @@ function isSelected(element) {
   return element.classList.contains('selected');
 }
 
-function resultClick(id, pOra){
+function resultClick(element) {
 
   //confirm button css
   let design = document.getElementById("confirm_button");
@@ -124,13 +124,12 @@ function resultClick(id, pOra){
 
   //clear previous highlight formatting
   let check= document.getElementsByClassName("overall")
-  for (i=0; i<check.length; i++){
+  for (let i=0; i<check.length; i++){
     check[i].classList.remove("highlight")
   }
 
   // add highlight formatting
-  let high = document.getElementById(id);
-  high.classList.add("highlight")
+  element.classList.add("highlight")
 
   ///shows selected title
   let selected= document.getElementById("selected");
@@ -140,8 +139,8 @@ function resultClick(id, pOra){
   let get_id = document.getElementById("ID");
   let get_pOra = document.getElementById("pOra");
 
-  get_id.value= id;
-  get_pOra.value=pOra;
+  get_id.value = element.dataset.spotifyId;
+  get_pOra.value = element.dataset.pora;
 
 
   console.log(get_id.value)
