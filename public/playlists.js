@@ -19,7 +19,7 @@ var min = parseInt(inputs.length_minutes)
 var sec = parseInt(inputs.length_seconds)
 
 // source : https://algorithms.tutorialhorizon.com/given-an-array-print-all-unique-subsets-with-a-given-sum/
-// all times are in miliseconds
+// all times are in milliseconds
 
 // Create new map (song title, song length)
 // Is this how I can grab the values from my get request?
@@ -71,7 +71,7 @@ const response = fetch('/playlists', {
 
     });
     arrA = songLengths
-    
+
     findSets(arrA, n);
     findFinal()
 
@@ -102,7 +102,7 @@ function findFinal(){
   console.log("high")
 
   console.log(possibilitiesHigher)
-  
+
 
   var finalLower = Math.max(...possibilitiesLower.keys());
 
@@ -110,11 +110,11 @@ function findFinal(){
 
   console.log("finals")
 
-//loop through possibilitiesLower.get(finalLower) array 
+//loop through possibilitiesLower.get(finalLower) array
 
 var lowerTotalTime= convertMsToTime(finalLower)
 var titleHTML = "        <p class='inline text-lg'>"+
-"Playlist Option 1 Length: "+ 
+"Playlist Option 1 Length: "+
 "</p>"+
 "<p class=' inline text-lg font-bold'>"+
 lowerTotalTime+
@@ -122,7 +122,7 @@ lowerTotalTime+
 
 var songHTML =""
 var shorterIDArr = []
-possibilitiesLower.get(finalLower).forEach(element =>  { 
+possibilitiesLower.get(finalLower).forEach(element =>  {
   console.log(songDict.get(element).title)
   shorterIDArr.push("spotify:track:"+songDict.get(element).id)
 
@@ -153,7 +153,7 @@ higherTotalTime+
 songHTML =""
 var longerIDArr = []
 
-possibilitiesHigher.get(finalHigher).forEach(element =>  { 
+possibilitiesHigher.get(finalHigher).forEach(element =>  {
   console.log(songDict.get(element).title)
   longerIDArr.push("spotify:track:"+songDict.get(element).id)
 
@@ -178,12 +178,12 @@ possibilitiesHigher.get(finalHigher).forEach(element =>  {
 
 
   // buttons
-    
-  document.getElementById("option1Btn").addEventListener("click", function(){ 
+
+  document.getElementById("option1Btn").addEventListener("click", function(){
     option1(shorterIDArr)
   });
 
-  document.getElementById("option2Btn").addEventListener("click", function(){ 
+  document.getElementById("option2Btn").addEventListener("click", function(){
     option2(longerIDArr)
   });
 
@@ -225,7 +225,7 @@ function combinationUtil(arrA, sum, currSum, start, combinationList){
     return;
   }
 
-  
+
   if(currSum==n) {
     //  console.log(combinationList);
       return;

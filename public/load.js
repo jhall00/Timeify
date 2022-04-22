@@ -27,59 +27,53 @@ test.addEventListener('click', async _ => {
           //   "<img class='cover_art' src='" + element.cover_art + "'>" +
           //   "<p>" + element.title + "</p>";
 
-          searchResultsHTML += "<div onclick = 'resultClick(\""+ String(element.id)+"\",\"playlist\")' data-spotify-id=\"" + element.id + "\" class=' playlist_select  mx-2'>" +
-          "<img class='cover_art' src='" + element.cover_art + "'>" +
-          "<p>" + element.title + "</p>";
-
+          searchResultsHTML += "<div onclick = 'resultClick(this)' data-title='"+ element.title.replace(/'/,"&#39") + "' data-pOra=\"playlist\" data-spotify-id='" + element.id + "' class='playlist_select overall'>";
+          if (element.cover_art != null) {
+            searchResultsHTML += `<div class="art_box"><img id="temp" class="cover_art" src="${element.cover_art}">`;
+          } else {
+            //TODO add placeholder image for missing album art.
+          }
+          searchResultsHTML += `<p class="aTitle">${element.title}</p>`;
+          searchResultsHTML += `<p class="pOwner">${element.owner}</p>`;
           searchResultsHTML += "</div>";
-          searchResultsHTML;
           document.getElementById("searchResults").innerHTML = searchResultsHTML
 
         }
-
-
-
-
     }));
 
 });
 
-function resultClick(id, pOra){
+function resultClick(element) {
+
+  //confirm button css
+  let design = document.getElementById("confirm_button");
+  design.classList.remove("cursor-not-allowed","opacity-50")
+
+  //clear previous highlight formatting
+  let check= document.getElementsByClassName("overall")
+  for (let i=0; i<check.length; i++){
+    check[i].classList.remove("highlight")
+  }
+  // add highlight formatting
+  element.classList.add("highlight")
+
+  ///shows selected title //TODO ELEMENT NOT YET ADDED
+  // let selected= document.getElementById("selected");
+  // selected.innerHTML = element.dataset.title;
+  // window.location.href = "/player/" + element.dataset.spotifyId;
+
+  document.getElementById("loadSubmit").onclick = function() {
+    window.location.href = "/player/" + element.dataset.spotifyId;
+  };
+
+  //source hint
+  let get_id = document.getElementById("ID");
+  let get_pOra = document.getElementById("pOra");
+
+  get_id.value = element.dataset.spotifyId;
+  get_pOra.value = "playlist";
 
 
-var yourSelect =document.getElementById("playlist-load")
-var currentSelected = ""
-yourSelect.addEventListener('change', (event) => {
-
-  currentSelected = yourSelect.options[ yourSelect.selectedIndex ].dataset.spotifyId
-});
-
-
-document.getElementById("loadSubmit").onclick = function(){
-  window.location.href = "/player/"+currentSelected;
-
-};
-
-
-
-
-//source hint
-var sourceQ = document.getElementById("sourceQ")
-
-
-  var get_id= document.getElementById("ID")
-  var get_pOra= document.getElementById("pOra")
-
-  get_id.value= id;
-  get_pOra.value=pOra;
-
-
-  console.log(get_id.value)
-  console.log(get_pOra.value)
-  //get input id ="hidden" set value = id
-  // input id = pOra set value = pOra
-
-
-  // add highlight
-  // get rid of class disabled
+  console.log(get_id.value);
+  console.log(get_pOra.value);
 }

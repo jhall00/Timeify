@@ -1,8 +1,6 @@
 var test = document.getElementById("searchSubmit");
 var album_button = document.getElementById("album_button");
 var playlist_button = document.getElementById("playlist_button");
-var confirm_button = document.getElementById("confirm_button")
-
 test.addEventListener('click', async _ => {
   var searchResultsHTML =""
   let selected = "";
@@ -36,7 +34,7 @@ test.addEventListener('click', async _ => {
 
 
         if (isSelected(album_button)) {
-          searchResultsHTML += "<div onclick = 'resultClick(this)' data-title='"+ element.title.replace(/'/,"&#39") + "'data-pOra=\"album\" data-spotify-id='" + element.id + "' class='album_select overall'>";
+          searchResultsHTML += "<div onclick = 'resultClick(this)' data-title='"+ element.title.replace(/'/,"&#39") + "' data-pOra=\"album\" data-spotify-id='" + element.id + "' class='album_select overall'>";
           if(element.cover_art != null) {
             searchResultsHTML += `<div class="art_box"><img id='temp' class='cover_art' src='${element.cover_art}'>`;
           } else {

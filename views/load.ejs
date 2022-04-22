@@ -37,7 +37,7 @@
                     <form>
 
                         <div class="md:flex md:items-center mb-6">
-                            <div class=" flex items-center">
+                            <div class="flex items-center">
 
                                 <img class="inline pr-3" id="sourceQ" src="/questionMark.svg" alt="question mark">
                                 <label class="block pr-3 text-white font-bold md:text-right mb-1 md:mb-0" for="my_source">
@@ -50,14 +50,14 @@
                                 </button>
                             </div>
                             <div id="sourceInstructions" class="invisible bg-gray-200 absolute mb-16 rounded-lg">
-                                <p class=" p-1 text-xs">Have you already generated <br>a playlist with Timeify? <br>Load it in here.</p>
+                                <p class="p-1 text-xs">Have you already generated <br>a playlist with Timeify? <br>Load it in here.</p>
                             </div>
                         </div>
 
 
                         <div class="md:flex justify-center">
                             <input class="w-28 bg-mint hover:bg-shadow_mint hover:cursor-pointer text-black text-lg font-bold py-3 px-8 rounded-xl drop-shadow-md"
-                                    id="loadSubmit" value="Load" /><br><br>
+                                    id="loadSubmit" type="button" value="Load"/><br><br>
                             <hr>
                         </div>
                     </form>
@@ -74,10 +74,10 @@
             <div class="flex mb-6 items-center">
                 <input
                         class=" bg-gray-200 appearance-none border-2 border-gray-200 rounded w-fit py-2 pl-3 pr-8 mt-4 mr-4 text-gray-700 leading-tight focus:outline-none focus:bg-white"
-                        id="search_term" type="text" name="searchTerm" aria-label="Search" placeholder="Search"><br>
+                        id="search_term" type="search" name="searchTerm" aria-label="Search" placeholder="Search"><br>
                 <input
                         class=" bg-mint hover:bg-shadow_mint text-black font-bold py-3 px-4 mt-4 rounded-xl drop-shadow-md"
-                        id="searchSubmit" type="submit" value="Search" name="search" /><br><br>
+                        id="searchSubmit" type="submit" value="Search" name="search"/><br><br>
             </div>
             <hr>
             <br>
@@ -96,8 +96,8 @@
                 <% } %>
             </div>
             <div class="items-center">
-            <button class="bg-main-green opacity-50 cursor-not-allowed text-white py-3 px-4 rounded-xl drop-shadow-md cursor-pointer" type="button"
-            value="Confirm"name="confirm" id="confirm_button" > Confirm </button>
+                <button class="bg-main-green opacity-50 cursor-not-allowed text-white py-3 px-4 rounded-xl drop-shadow-md cursor-pointer"
+                        type="button" value="Confirm" name="confirm" id="confirm_button"> Confirm </button>
             </div>
         </div>
 
@@ -112,6 +112,7 @@
   var search = document.getElementById("mySearch");
   var btn = document.getElementById("select-source");
   var span = document.getElementsByClassName("close")[0];
+  var confirm = document.getElementById("confirm_button");
 
   btn.onclick = function() {
     search.style.display = "block";
@@ -126,6 +127,10 @@
     if (event.target === search) {
       search.style.display = "none";
     }
+  }
+
+  confirm.onclick = function(){
+    search.style.display = "none";
   }
 </script>
 <script src="/load.js"></script>
