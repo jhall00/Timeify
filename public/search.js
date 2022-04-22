@@ -133,7 +133,7 @@ function resultClick(element) {
 
   ///shows selected title
   let selected= document.getElementById("selected");
-  selected.innerHTML = high.dataset.title;
+  selected.innerHTML = element.dataset.title;
 
   // id pora vals
   let get_id = document.getElementById("ID");
