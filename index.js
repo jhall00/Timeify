@@ -142,7 +142,11 @@ app.post('/load', (req, res) => {
             if (item.images.length > 0) {
               image_url = item.images[0].url;
             }
-            results.push({ title: item.name, cover_art : image_url, id: item.id });
+            let isTimeify = false;
+            if (item.description.includes("Timeify")) {
+              isTimeify = true;
+            }
+            results.push({ title: item.name, cover_art : image_url, id: item.id, owner: item.owner.display_name, isTimeify: isTimeify});
           } else {
             console.log("excluding " + item.name + " from search results");
           }
