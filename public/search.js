@@ -121,9 +121,9 @@ function resultClick(element) {
   design.classList.remove("cursor-not-allowed","opacity-50")
 
   //clear previous highlight formatting
-  let check= document.getElementsByClassName("overall")
-  for (let i=0; i<check.length; i++){
-    check[i].classList.remove("highlight")
+  let check = document.getElementsByClassName("overall");
+  for (const checkElement of check) {
+    checkElement.classList.remove("highlight");
   }
 
   // add highlight formatting
