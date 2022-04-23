@@ -64,7 +64,7 @@ body {
 }
 
 .selected {
-  @apply border-4 border-solid border-main-green rounded-lg ;
+  @apply border-4 border-solid border-main-green rounded-lg m-n4;
 }
 
 .art_box {

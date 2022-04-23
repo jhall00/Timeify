@@ -28,6 +28,9 @@ module.exports = {
       width: {
         '450': '450px',
       },
+      margin: {
+        'n4': '-4px'
+      }
     },
 
   },
