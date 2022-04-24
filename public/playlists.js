@@ -37,18 +37,15 @@ document.getElementById("header").innerHTML += timeHTML +"?"
 var songDict = new Map();
 var songLengths =[]
 
+
+
+
+var mainList =[]
+var possibilityLower = {sum:0, subset:[]}
+var possibilityHigher = {sum:Math.pow(10, 1000), subset:[]}
+var n
+
 // make post call to get list of playlist/album songs and lengths
-
-
-var arrA =[]
-// var realGoal = 600000
-// 30 secs offset
-var offset = 30000
-var n = realGoal+offset;
-
-var possibilitiesLower = new Map();
-
-var possibilitiesHigher = new Map();
 
 const response = fetch('/playlists', {
   method: 'POST',
@@ -70,13 +67,83 @@ const response = fetch('/playlists', {
       }
 
     });
-    arrA = songLengths
+    mainList = songLengths
+    var retVals = dataSegment(mainList, realGoal)
+    
 
-    findSets(arrA, n);
-    findFinal()
+    // var realGoal = 600000
+    // 30 secs offset
+    realGoal = realGoal - retVals.songList.sum
+
+    var offset = 180000
+    n = realGoal+offset;
+
+
+
+    findSets(retVals.shortSide, n);
+    findFinal(retVals.songList)
 
   }))
 
+  // modification: segment data so that input to main algorithm is smaller and takes less time
+
+
+
+function dataSegment(mainList, goal){
+  mainList.sort()
+  var shortTime = 0
+  var shortSide = []
+  var songList = {sum: 0, subset:[]}
+
+  var i = 0
+  do {
+
+    shortSide.push(mainList[i])
+    shortTime += mainList[i]
+    i++
+
+  // fill shortside with left of sorted list until it's 15 mins
+  } while (shortTime < 900000); // 15 minutes
+
+  // 10 : 600000
+  // 12: 720000
+  // 15 : 900000
+
+  // 6 : 360000
+  // 8: 480000
+  // 10: 600000
+
+  // put whatever didn't make it into shortSide into longSide
+  var longSide = mainList.slice(i)
+
+  var j=0
+
+  // for (var j = 0; j<longSide.length; j++){
+  while (j<longSide.length){
+    // once there is 8 mins of music left to get filled, break - switch to original algorithm
+    if((goal - songList.sum) <= 900000 ){ // 6 mins
+      break
+    }
+
+    //push the longest songs to fill time first
+    
+    songList.subset.push(longSide[j])
+    songList.sum += longSide[j]
+    j++
+  }
+
+  shortSide = shortSide.concat(longSide.slice(j))
+
+
+  console.log(songList)
+  console.log(longSide)
+  console.log(shortSide)
+
+  return {
+    'shortSide': shortSide,
+    'songList': songList
+  };
+}
 
 
 
@@ -92,27 +159,36 @@ function findSets(arrA, sum){
   combinationUtil(arrA, sum, 0, 0, combinationList);
 }
 
-function findFinal(){
+function findFinal(songList){
   // set to infinity
 
   console.log("low")
 
-  console.log(possibilitiesLower)
+  console.log(possibilityLower)
 
   console.log("high")
 
-  console.log(possibilitiesHigher)
+  console.log(possibilityHigher)
 
 
-  var finalLower = Math.max(...possibilitiesLower.keys());
+  // var finalLower = Math.max(...possibilitiesLower.keys());
 
-  var finalHigher = Math.min(...possibilitiesHigher.keys());
+  // var finalHigher = Math.min(...possibilitiesHigher.keys());
 
   console.log("finals")
 
+
+  possibilityLower.subset = possibilityLower.subset.concat(songList.subset)
+  possibilityLower.sum += songList.sum
+  console.log(possibilityLower.sum)
+  possibilityHigher.subset = possibilityHigher.subset.concat(songList.subset)
+  possibilityHigher.sum += songList.sum
+  console.log(possibilityHigher.sum)
+
+
 //loop through possibilitiesLower.get(finalLower) array
 
-var lowerTotalTime= convertMsToTime(finalLower)
+var lowerTotalTime= convertMsToTime(possibilityLower.sum)
 var titleHTML = "        <p class='inline text-lg'>"+
 "Playlist Option 1 Length: "+
 "</p>"+
@@ -122,7 +198,7 @@ lowerTotalTime+
 
 var songHTML =""
 var shorterIDArr = []
-possibilitiesLower.get(finalLower).forEach(element =>  {
+possibilityLower.subset.forEach(element =>  {
   console.log(songDict.get(element).title)
   shorterIDArr.push("spotify:track:"+songDict.get(element).id)
 
@@ -141,7 +217,7 @@ possibilitiesLower.get(finalLower).forEach(element =>  {
 
   document.getElementById("optionLowerList").insertAdjacentHTML("afterbegin", titleHTML + songHTML);
 
-  var higherTotalTime = convertMsToTime(finalHigher)
+  var higherTotalTime = convertMsToTime(possibilityHigher.sum)
 
 
 titleHTML = "        <p class='inline text-lg'>"+
@@ -153,7 +229,7 @@ higherTotalTime+
 songHTML =""
 var longerIDArr = []
 
-possibilitiesHigher.get(finalHigher).forEach(element =>  {
+possibilityHigher.subset.forEach(element =>  {
   console.log(songDict.get(element).title)
   longerIDArr.push("spotify:track:"+songDict.get(element).id)
 
@@ -197,32 +273,36 @@ possibilitiesHigher.get(finalHigher).forEach(element =>  {
 
 function combinationUtil(arrA, sum, currSum, start, combinationList){
 
-  // find subsets within a minute range
-  if((currSum <= realGoal && currSum >= realGoal-offset)){
-    // console.log(combinationList);
-    //Map : (Sum, subset)
+  // // find subsets within a minute range
+  // if((currSum <= realGoal && currSum >= realGoal-offset)){
+  //   // console.log(combinationList);
+  //   //Map : (Sum, subset)
 
-    possibilitiesLower.set(currSum, combinationList.slice())
+  //   possibilitiesLower.set(currSum, combinationList.slice())
 
-      // console.log("L  "+combinationList);
+  //     // console.log("L  "+combinationList);
 
-    // possibilitiesLower.push({subset: combinationList.slice(), sum: currSum})
-    // return;
+  //   // possibilitiesLower.push({subset: combinationList.slice(), sum: currSum})
+  //   // return;
+  // }
+
+  if(currSum > possibilityLower.sum && currSum < realGoal){
+    possibilityLower.sum = currSum
+    possibilityLower.subset = combinationList.slice()
+    // return
   }
 
-  if(currSum==realGoal) {
-    //  console.log(combinationList);
-      return;
-  }
+  // if(currSum==realGoal) {
+  //   //  console.log(combinationList);
+  //     return;
+  // }
 
 
-  else if(((currSum > realGoal) && (currSum <= realGoal+offset))){
-    // console.log(combinationList);
-    possibilitiesHigher.set(currSum, combinationList.slice())
-      // console.log("H "+combinationList);
+  else if(currSum < possibilityHigher.sum && currSum >= realGoal){
+    possibilityHigher.sum = currSum
+    possibilityHigher.subset = combinationList.slice()
+    return
 
-    // possibilitiesHigher.push({subset: combinationList.slice(), sum: currSum})
-    return;
   }
 
 

@@ -36,6 +36,8 @@ test.addEventListener('click', async _ => {
           searchResultsHTML += `<p class="aTitle">${element.title}</p>`;
           searchResultsHTML += `<p class="pOwner">${element.owner}</p>`;
           searchResultsHTML += "</div>";
+          searchResultsHTML += "</div>";
+
           document.getElementById("searchResults").innerHTML = searchResultsHTML
 
         }
@@ -77,3 +79,16 @@ function resultClick(element) {
   console.log(get_id.value);
   console.log(get_pOra.value);
 }
+
+
+//source hint
+var sourceQ = document.getElementById("sourceQ")
+
+var sourceInst = document.getElementById("sourceInstructions")
+sourceQ.onmouseover = function(){
+    sourceInst.style.visibility = "visible"
+
+};
+sourceQ.onmouseout = function(){
+    sourceInst.style.removeProperty("visibility")
+};
