@@ -3,7 +3,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'montserrat': ['Montserrat', 'sans-serif']
+        'montserrat': ['Montserrat', 'sans-serif'],
+        'orbitron': ['Orbitron', 'sans-serif']
+
       },
       colors:{
       'mint': '#CEE2E4',
