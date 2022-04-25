@@ -266,6 +266,7 @@ var bar1 = new ldBar("#help");
         if (countDown.innerHTML == convertMsToTime(halftime))
         {
           document.getElementById("myHalfway").style.display = "block";
+          play_halfway_notification();
         }
 
         if (countDown.innerHTML == convertMsToTime(close_popup))
@@ -320,6 +321,11 @@ var bar1 = new ldBar("#help");
   });
     
 
+function play_halfway_notification(){
+  let sound = new Audio("/halfway_notification.mp3");
+  // console.log("sound should be playing")
+  sound.play();
+}
 
 function convertSeconds(s) {
   var min = Math.floor(s / 60).toString();
