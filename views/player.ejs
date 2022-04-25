@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" type="text/css" href="/loading-bar.css">
     <script type="text/javascript" src="/loading-bar.js"></script>
-    
+
     <!-- for tailwind (uncomment when ready to use) -->
     <link rel="stylesheet" href="/styles.css">
     <link rel="stylesheet" href="/custom_styles.css">
@@ -28,8 +28,8 @@
         <!-- nav bar -->
 
         <div class="navbar">
-            <a href="/home">
-                <img src="/Logo.svg" class="p-2 h-14" />
+            <a href="/home" aria-label="Timeify Home">
+                <img src="Logo.svg" class="p-2 h-14" alt="Timeify"/>
             </a>
             <div class="justify-end pt-3">
 
@@ -49,7 +49,7 @@
             <h2 id="timerhtml"style="display:none">Timeleft</h2>
             <h2 id="percentage"style="display:none">percent</h2>
             <h2 id="debug"style="display:none">debug</h2>
-           
+
         </div>
         <div class="flex justify-between">
             <div class = " play flex justify-center">
@@ -59,13 +59,13 @@
                 class=" layer1 my-5 mx-8 bg-gray-600 paused unStarted first rounded-full h-fit opacity-50 cursor-not-allowed">
                     <img id="ppButtonPic" src="/playButton.svg" alt="play button">
                 </button>
-                
+
                 <!-- Halfway popup -->
                 <p class="absolute z-40 text-black bg-white flex justify-center text-center rounded-2xl" style="left: 25%; right: 25%; width: 50%; font-size: 50px; display: none;" id="myHalfway">Halfway done!</p >
 
-                <!-- progress bar// loading.io style --> 
+                <!-- progress bar// loading.io style -->
                 <div id="help"
-                
+
                 data-preset="circle"
                 class="ldBar layer2 label-center w-fit"
                 data-value="0"
@@ -73,7 +73,7 @@
                     <h3 class="font-orbitron text-3xl absolute text-center w-full" id="countDown">Timer</h3>
 
                 </div>
-            
+
                 <style type="text/css">
                     .ldBar path.mainline {
                         stroke: #456158;
@@ -87,7 +87,7 @@
                         margin-top: 50px;
                         margin-left: 50px;
                         margin-right: 50px;
-                        width: 500px; 
+                        width: 500px;
                         height:500px
                     }
                     .layer1 {
@@ -103,7 +103,7 @@
                     }
                 </style>
               </div>
-     
+
 
 
             <!-- song list -->
@@ -119,22 +119,22 @@
                 </label>
             </div>
                 <div class="flex bg-playlist-gray min-w-fit h-fit p-6 rounded-t-2xl ">
-        
+
 
                     <img class="w-32 h-32 object-cover" id="cover" src= <%= cover_art ;%> alt="cover art">
                     <!-- for hover cove art change overlay -->
-                    
+
                     <!-- <div class="w-32 h-32 opacity-0 hover:opacity-100 absolute">
                         <img class="" src= "/pencil.svg" alt="edit icon">
                            </div> -->
-  
+
 
                     <!-- <div class="w-32 h-32 opacity-0 hover:opacity-100 absolute">
                         <img class="absolute" src= "/pencil.svg" alt="edit icon">
                             <input id="image_file" class="w-full h-full opacity-0 absolute" type="file" name="cover_art">
                     </div> -->
 
-  
+
                     <div class="flex-col w-full">
                         <p id="playerTitle" class="text-2xl text-right text-white "><%= playlistTitle ;%> </p>
                         <p id="playingType" class="text-s text-right text-white  pb-4">Playlist</p>
