@@ -480,10 +480,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   visibility: hidden;
 }
 
-.static{
-  position: static;
-}
-
 .fixed{
   position: fixed;
 }
@@ -509,6 +505,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   right: 5rem;
 }
 
+.z-40{
+  z-index: 40;
+}
+
 .float-right{
   float: right;
 }
@@ -529,21 +529,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mx-8{
   margin-left: 2rem;
   margin-right: 2rem;
-}
-
-.mx-6{
-  margin-left: 1.5rem;
-  margin-right: 1.5rem;
-}
-
-.mx-4{
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
-
-.mx-2{
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
 }
 
 .mb-6{
@@ -730,10 +715,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .flex-col{
   flex-direction: column;
-}
-
-.content-center{
-  align-content: center;
 }
 
 .items-center{
@@ -969,12 +950,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   text-align: right;
 }
 
-.font-montserrat{
-  font-family: Montserrat, sans-serif;
-}
-
 .font-orbitron{
   font-family: Orbitron, sans-serif;
+}
+
+.font-montserrat{
+  font-family: Montserrat, sans-serif;
 }
 
 .text-lg{

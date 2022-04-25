@@ -19,7 +19,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
   const player = new Spotify.Player({
       name: 'Timeify Web Player',
       getOAuthToken: cb => { cb(accessStr); },
-      volume: 0.5
+      volume: 0.8
   });
 
   // Ready
@@ -63,7 +63,7 @@ window.onSpotifyWebPlaybackSDKReady = () => {
         if(currentSongID != previousSongID){
           // we need to buffer the countdown by 1.8 seconds since there is a delay between songs and when 
           // the playlist is first played
-          counter -= 1800
+          counter -= 1650
           previousSongID = currentSongID
           
         }
