@@ -1,8 +1,9 @@
-// var load_form = document.getElementById("generate_form");
+var load_form = document.getElementById("load_form");
 
-// load_form.addEventListener('submit', (event) => {
-//     if (document.getElementById('selected').innerHTML == ''){
-//         event.preventDefault();
-//         console.log("No source selected.");
-//     }
-// })
+load_form.addEventListener('submit', (event) => {
+    if (document.getElementById('selected').innerHTML == ''){
+        event.preventDefault();
+        alert("Please load a playlist source using the Select Source button.")
+        console.log("No source selected.");
+    }
+})
