@@ -60,8 +60,8 @@ function resultClick(element) {
   element.classList.add("highlight")
 
   ///shows selected title //TODO ELEMENT NOT YET ADDED
-  // let selected= document.getElementById("selected");
-  // selected.innerHTML = element.dataset.title;
+   let selected= document.getElementById("selected");
+   selected.innerHTML = element.dataset.title;
   // window.location.href = "/player/" + element.dataset.spotifyId;
 
   document.getElementById("loadSubmit").onclick = function() {
