@@ -236,6 +236,7 @@ var interval = -1
 var halftime = timeleft / 2
 var close_popup = halftime - 5000
 var countDown = document.getElementById("countDown")
+var checkbox = document.getElementById("myCheck")
 
 countDown.innerHTML = convertMsToTime(timeleft - counter);
 
@@ -265,13 +266,24 @@ var bar1 = new ldBar("#help");
         // for the halfway popup
         if (countDown.innerHTML == convertMsToTime(halftime))
         {
-          document.getElementById("myHalfway").style.display = "block";
-          play_halfway_notification();
+          if (checkbox.checked == true)
+          {
+            document.getElementById("myHalfway").style.display = "block";
+            play_halfway_notification();
+          }
+          
         }
 
         if (countDown.innerHTML == convertMsToTime(close_popup))
         {
           document.getElementById("myHalfway").style.display = "none";
+        }
+
+        // for the completion popup
+        if (countDown.innerHTML == convertMsToTime(0))
+        {
+          document.getElementById("myComplete").style.display = "block";
+          play_halfway_notification();
         }
 
         //load bar ////////////
