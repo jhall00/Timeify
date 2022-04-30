@@ -210,31 +210,50 @@ app.post('/playlists', (req, res) => {
   if(req.body.action == 'getSongs'){
     if(req.body.pOra == "album"){
 
-      var p1 =spotifyApi.getAlbum(req.body.ID)
+      var pAlbum =spotifyApi.getAlbum(req.body.ID)
       .then(function(data) {
         songList = data.body.tracks.items
         console.log('Album information', data.body);
       }, function(err) {
         console.error(err);
       });
+
+      Promise.all([pAlbum]).then((val) => {
+        res.send(songList)
+      });
     }
 
     else{
 
 
-     var p1= spotifyApi.getPlaylist(req.body.ID)
-      .then(function(data) {
-        songList = data.body.tracks.items
+  //  spotifyApi.getPlaylist(req.body.ID)
+  //     .then(function(data) {
+  //       songList = data.body.tracks.items
 
-        // console.log('Some information about this playlist', data.body);
-      }, function(err) {
-        console.log('Something went wrong!', err);
-      });
+  //       // console.log('Some information about this playlist', data.body);
+  //     }, function(err) {
+  //       console.log('Something went wrong!', err);
+  //     });
+
+      var pPlaylist = getAllSongsDetails(req.body.ID);
+
+      Promise.all([pPlaylist]).then(() => {
+        pPlaylist.then(songList => {
+          res.send(songList)
+  
+        }).catch(err => {
+          console.log(err);
+        });
+    
+      })
+
 
     }
-    Promise.all([p1]).then((val) => {
-      res.send(songList)
-    });
+    // Promise.all([p1]).then((val) => {
+    //   res.send(songList)
+    // });
+
+
 
   }
 
@@ -247,7 +266,18 @@ app.post('/playlists', (req, res) => {
       return data.body.id
     })
     .then(function(id) {
-      return spotifyApi.addTracksToPlaylist(id, req.body.songList)
+      var numBatches = Math.floor(req.body.songList.length/100) + 1;
+
+      var chunk = 100
+      for (let batchNum = 0; batchNum < numBatches ; batchNum++) {
+        var last =  batchNum * 100
+        spotifyApi.addTracksToPlaylist(id, req.body.songList.slice(last, chunk))
+        chunk = chunk + 100
+      }
+
+      // for(var i = 0; i<= 99; i++){
+      //   return spotifyApi.addTracksToPlaylist(id, req.body.songList)
+      // }
 
     })
 
@@ -264,23 +294,27 @@ app.post('/playlists', (req, res) => {
 
 })
 
+
+
 app.get('/player/:ID', (req, res) => {
   // var pID = "37i9dQZF1DZ06evO0ENBD2"
   var pID = String(req.params.ID)
-  var songs = []
+  // var songs = []
   var playlistTitle =""
   var cover_art =""
   var playlistLength =0
   var type ="playlist"
+  var total = 0
   const p1 = spotifyApi.getPlaylist(pID)
   .then(function(data) {
     // console.log('Some information about this playlist', data.body);
     // console.log("/n/n all the songs", data.body.tracks.items);
+    total = data.body.tracks.total
     data.body.tracks.items.forEach(track=> {
 
-      playlistLength += track.track.duration_ms
-      var length = millisToMinutesAndSeconds(track.track.duration_ms)
-      songs.push({title: track.track.name, artist: track.track.artists[0].name, length: length})
+      // playlistLength += track.track.duration_ms
+      // var length = millisToMinutesAndSeconds(track.track.duration_ms)
+      // songs.push({title: track.track.name, artist: track.track.artists[0].name, length: length})
 
 
     })
@@ -292,17 +326,118 @@ app.get('/player/:ID', (req, res) => {
   });
 
 
+  // const p2 = spotifyApi.getPlaylistTracks(pID, {
+  //   offset: 0,
+  //   limit: 100,
+  //   fields: 'items'
+  // })
+  // .then(
+  //   function(data) {
+
+  //     // data.body.items.forEach(track=> {
+  //     //   var length = millisToMinutesAndSeconds(track.track.duration_ms)
+
+  //     //   songs.push({title: track.track.name, artist: track.track.artists[0].name, length: length})
+
+  //     // })
+  //   },
+  //   function(err) {
+  //     console.log('Something went wrong!', err);
+  //   }
+  // );
+
+
+
+
+    // var limit = 100;
+    // var numBatches = Math.floor(data.body.total / limit) + 1;
+    // for (var batchNum = 0; batchNum <= numBatches ; batchNum++) {
+    //     const p2 = spotifyApi.getPlaylistTracks(pID, {offset: batchNum * limit})
+    //     .then(function(newData) {
+    //       // console.log('The playlist contains these tracks', newData.body);
+    //       newData.body.items.forEach(track=> {
+
+    //           var length = millisToMinutesAndSeconds(track.track.duration_ms)
+
+    //           songs.push({title: track.track.name, artist: track.track.artists[0].name, length: length})
+    //         })
+
+    //       // console.log(`Retrieved tracks ${batchNum * limit} through ${batchNum * limit + limit}`);
+    //     }, function(err) {
+    //         console.error(`Error retreiving sourcePlaylist data.`);
+    //     });
+    // };
+
+
+
+
+    
+    // var songsP = getAllSongs(pID);
+
 
   access_token = spotifyApi.getAccessToken()
 
   // wait for all promises to be available
   Promise.all([p1]).then(() => {
-    res.render("player", {songs, playlistTitle, access_token, cover_art, playlistLength})
+    var songsP = getAllSongs(pID);
+
+    songsP.then(obj => {
+      songs = obj.s
+      playlistLength = obj.l
+      res.render("player", {songs, playlistTitle, access_token, cover_art, playlistLength})
+    }).catch(err => {
+      console.log(err);
+    });
 
   })
 
 
 });
+
+
+async function getAllSongs(id) {
+  var data = await spotifyApi.getPlaylistTracks(id);
+  var numBatches = Math.floor(data.body.total/100) + 1;
+  var promises = [];
+  for (let batchNum = 0; batchNum < numBatches ; batchNum++) {
+    var promise = getSongs(id, batchNum * 100);
+    promises.push(promise);
+  }
+  var rawSongData = await Promise.all(promises);
+  var songs = [];
+  var playlistLength = 0
+  for (let i = 0; i < rawSongData.length; i++) {
+    rawSongData[i].body.items.forEach(track=> {
+        var length = millisToMinutesAndSeconds(track.track.duration_ms)
+        playlistLength += track.track.duration_ms
+
+        songs.push({title: track.track.name, artist: track.track.artists[0].name, length: length})
+      })
+  }
+  return {s:songs, l:playlistLength};
+}
+
+async function getAllSongsDetails(id) {
+  var data = await spotifyApi.getPlaylistTracks(id);
+  var numBatches = Math.floor(data.body.total/100) + 1;
+  var promises = [];
+  for (let batchNum = 0; batchNum < numBatches ; batchNum++) {
+    var promise = getSongs(id, batchNum * 100);
+    promises.push(promise);
+  }
+  var rawSongData = await Promise.all(promises);
+  var songList = [];
+
+  for (let i = 0; i < rawSongData.length; i++) {
+        songList =songList.concat(rawSongData[i].body.items)
+  }
+  return songList;
+}
+
+async function getSongs(id, offset) {
+  var songs = await spotifyApi.getPlaylistTracks(id, {offset: offset});
+  return songs;
+}
 
 
 app.post('/player/:ID', (req, res) => {

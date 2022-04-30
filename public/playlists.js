@@ -132,7 +132,21 @@ function dataSegment(mainList, goal){
     j++
   }
 
-  shortSide = shortSide.concat(longSide.slice(j))
+  
+  var percentage = longSide.length - j
+
+  if(percentage > 50){
+    percentage = percentage * .15
+    shortSide = shortSide.concat(longSide.slice(j, percentage))
+  }
+  else if(percentage > 30){
+    percentage = percentage * .30
+    shortSide = shortSide.concat(longSide.slice(j, percentage))
+  }
+  else{
+    shortSide = shortSide.concat(longSide.slice(j))
+ 
+  }
 
 
   console.log(songList)
@@ -216,6 +230,7 @@ possibilityLower.subset.forEach(element =>  {
   }  );
 
   document.getElementById("optionLowerList").insertAdjacentHTML("afterbegin", titleHTML + songHTML);
+  document.getElementById("loading1").hidden = true
 
   var higherTotalTime = convertMsToTime(possibilityHigher.sum)
 
@@ -248,6 +263,7 @@ possibilityHigher.subset.forEach(element =>  {
   }  );
 
   document.getElementById("optionHigherList").insertAdjacentHTML("afterbegin", titleHTML + songHTML);
+  document.getElementById("loading2").hidden = true
 
 
 
