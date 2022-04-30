@@ -284,6 +284,8 @@ var bar1 = new ldBar("#help");
         {
           document.getElementById("myComplete").style.display = "block";
           play_halfway_notification();
+          setTimeout(function(){document.getElementById("myComplete").style.display = "none"
+        }, 5000)
         }
 
         //load bar ////////////
