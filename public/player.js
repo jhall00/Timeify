@@ -231,13 +231,13 @@ var i = 0;
 // var playlistSeconds =  convertMStoS(parseInt(playlistLengthStr))
 
 var timeleft = parseInt(playlistLengthStr)
-
+//timeleft = 10000
 var interval = -1
 var halftime = timeleft / 2
 var close_popup = halftime - 5000
 var countDown = document.getElementById("countDown")
 var checkbox = document.getElementById("myCheck")
-
+//var finishChecker = timeleft - 5000
 countDown.innerHTML = convertMsToTime(timeleft - counter);
 
 ///variables for load bar
@@ -333,11 +333,6 @@ var bar1 = new ldBar("#help");
   });
     
 
-function play_halfway_notification(){
-  let sound = new Audio("/halfway_notification.mp3");
-  // console.log("sound should be playing")
-  sound.play();
-}
 
 function convertSeconds(s) {
   var min = Math.floor(s / 60).toString();
@@ -368,4 +363,10 @@ function padTo2Digits(num) {
 
 
 };
+
+function play_halfway_notification(){
+  let sound = new Audio("/halfway_notification.mp3");
+  // console.log("sound should be playing")
+  sound.play();
+}
 
