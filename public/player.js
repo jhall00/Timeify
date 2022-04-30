@@ -169,6 +169,7 @@ async function sendDeviceID(device_id){
     .then(res =>     {if(res.msg == "transferred" ){
       document.getElementById("ppButton").classList.remove("opacity-50")
       document.getElementById("ppButton").classList.remove("cursor-not-allowed")
+      document.getElementById("ppButton").disabled = false
     }
     });
 
@@ -320,6 +321,7 @@ var bar1 = new ldBar("#help");
           console.log("done") //temporary (replace with notification done alarm) 
           ppButton.classList.remove("playing");
           ppButton.classList.add("stopped");
+          ppButton.disabled = true
           // For Mike: change to stop button so that user can click that to stop the alarm when it's playing
           ppButtonIcon.src="/stopButton.svg";
 
