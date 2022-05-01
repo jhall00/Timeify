@@ -69,7 +69,7 @@ const response = fetch('/playlists', {
     });
     mainList = songLengths
     var retVals = dataSegment(mainList, realGoal)
-    
+
 
     // var realGoal = 600000
     // 30 secs offset
@@ -126,13 +126,13 @@ function dataSegment(mainList, goal){
     }
 
     //push the longest songs to fill time first
-    
+
     songList.subset.push(longSide[j])
     songList.sum += longSide[j]
     j++
   }
 
-  
+
   var percentage = longSide.length - j
 
   if(percentage > 50){
@@ -145,7 +145,7 @@ function dataSegment(mainList, goal){
   }
   else{
     shortSide = shortSide.concat(longSide.slice(j))
- 
+
   }
 
 
@@ -200,6 +200,18 @@ function findFinal(songList){
   console.log(possibilityHigher.sum)
 
 
+  var inputs = getUrlVars()
+  inputs.newName = inputs.newName.replace("+", " ");
+
+  var hr = parseInt(inputs.length_hours)
+  var min = parseInt(inputs.length_minutes)
+  var sec = parseInt(inputs.length_seconds)
+  var realGoal = convertHMSToMS(hr,min,sec)
+//if realGoal is greater than or equal to higherTotalTime
+  if(Number.POSITIVE_INFINITY == possibilityHigher.sum){
+    document.getElementById("hd2").innerHTML = "We couldn't find a playlist that would fit your desired length. Please try a different playlist or adjust your timer."
+    document.getElementById("hd2").classList.add("text-red-500");
+  }
 //loop through possibilitiesLower.get(finalLower) array
 
 var lowerTotalTime= convertMsToTime(possibilityLower.sum)
