@@ -1,9 +1,8 @@
-var load_form = document.getElementById("load_form");
+var load = document.getElementById("loadSubmit");
 
-load_form.addEventListener('submit', (event) => {
+load.addEventListener('click', (e) => {
     if (document.getElementById('selected').innerHTML == ''){
-        event.preventDefault();
         alert("Please load a playlist source using the Select Source button.")
-        console.log("No source selected.");
+        console.log("Error: No source selected.");
     }
 })
