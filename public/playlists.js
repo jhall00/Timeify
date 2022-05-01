@@ -208,6 +208,7 @@ function findFinal(songList){
   var sec = parseInt(inputs.length_seconds)
   var realGoal = convertHMSToMS(hr,min,sec)
 //if realGoal is greater than or equal to higherTotalTime
+  var error = false
   if(Number.POSITIVE_INFINITY == possibilityHigher.sum){
     let hd2 = document.getElementById("hd2")
     hd2.innerText = "We couldn't find a playlist that would fit your desired length.";
@@ -223,6 +224,7 @@ function findFinal(songList){
       newElement.classList.add(element);
     });
     newElement.innerText = "You can choose the generated playlist below or pick a new source to generate from."
+    error = true
   }
 //loop through possibilitiesLower.get(finalLower) array
 
@@ -286,8 +288,19 @@ possibilityHigher.subset.forEach(element =>  {
 
   }  );
 
-  document.getElementById("optionHigherList").insertAdjacentHTML("afterbegin", titleHTML + songHTML);
-  document.getElementById("loading2").hidden = true
+  if (error == true){
+    document.getElementById("optionHigherList").innerHTML = ""
+    document.getElementById("option2Btn").disabled = true
+    document.getElementById("option2Btn").classList.add("cursor-not-allowed")
+    document.getElementById("option2Btn").classList.add("opacity-50")
+
+
+  }
+  else{
+    document.getElementById("optionHigherList").insertAdjacentHTML("afterbegin", titleHTML + songHTML);
+    document.getElementById("loading2").hidden = true
+
+  }
 
 
 
