@@ -30,7 +30,7 @@ var sec = parseInt(inputs.length_seconds)
 var realGoal = convertHMSToMS(hr,min,sec)
 
 var timeHTML = convertMsToTime(realGoal)
-document.getElementById("header").innerHTML += timeHTML +"?"
+document.getElementById("hd2").innerHTML += timeHTML +"?"
 
 // make dictionary of {songLength, ID} to use for lookup
 // make array of songLengths
@@ -209,8 +209,20 @@ function findFinal(songList){
   var realGoal = convertHMSToMS(hr,min,sec)
 //if realGoal is greater than or equal to higherTotalTime
   if(Number.POSITIVE_INFINITY == possibilityHigher.sum){
-    document.getElementById("hd2").innerHTML = "We couldn't find a playlist that would fit your desired length. Please try a different playlist or adjust your timer."
-    document.getElementById("hd2").classList.add("text-red-500");
+    let hd2 = document.getElementById("hd2")
+    hd2.innerText = "We couldn't find a playlist that would fit your desired length.";
+    hd2.classList.add("text-red-500");
+    let newElement;
+    newElement = hd2.insertAdjacentElement("afterend", document.createElement("p"));
+    hd2.classList.forEach(element => {
+      newElement.classList.add(element);
+    });
+    newElement.innerText = "The playlist or album you selected was too short to generate a playlist."
+    newElement = hd2.insertAdjacentElement("afterend", document.createElement("p"));
+    hd2.classList.forEach(element => {
+      newElement.classList.add(element);
+    });
+    newElement.innerText = "You can choose the generated playlist below or pick a new source to generate from."
   }
 //loop through possibilitiesLower.get(finalLower) array
 
